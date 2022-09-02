@@ -17,13 +17,17 @@ const Header = () => {
 
 const DivHeader = styled.div`
   width: 100%;
+  position: absolute;
+  top: 0;
+  max-width: 1200px;
+  min-width: 800px;
 `;
 
 const DivLink = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 15%;
+  width: 10em;
   margin-left: auto;
 `;
 

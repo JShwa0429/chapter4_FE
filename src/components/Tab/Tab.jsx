@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Poster from "./Poster";
+
 const Tab = () => {
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -14,58 +15,53 @@ const Tab = () => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 3,
+    autoplay: true,
+    autoplaySpeed: 5000,
+    pauseOnHover: true,
   };
-
+  const tabArray = ["넷플릭스", "왓챠", "티빙"];
+  const array = [...Array(10)].map((v, i) => i + 1);
   return (
     <DivTab>
       <ButtonDiv>
-        <TabButton onClick={() => setTabIndex(0)}>넷플릭스</TabButton>
-        <TabButton onClick={() => setTabIndex(1)}>왓챠</TabButton>
-        <TabButton onClick={() => setTabIndex(2)}>티빙</TabButton>
+        {tabArray.map((v, index) => (
+          <TabButton key={`Tab${index}`} onClick={() => setTabIndex(index)}>
+            {v}
+          </TabButton>
+        ))}
       </ButtonDiv>
-      {tabIndex === 0 && <p>넷플릭스</p>}
-      {tabIndex === 1 && <p>왓챠</p>}
-      {tabIndex === 2 && <p>티빙</p>}
-      <Slider {...settings}>
-        <Poster>
-          <h3>1</h3>
-        </Poster>
-        <Poster>
-          <h3>2</h3>
-        </Poster>
-        <Poster>
-          <h3>3</h3>
-        </Poster>
-        <Poster>
-          <h3>4</h3>
-        </Poster>
-        <Poster>
-          <h3>5</h3>
-        </Poster>
-        <Poster>
-          <h3>6</h3>
-        </Poster>
-        <Poster>
-          <h3>7</h3>
-        </Poster>
-        <Poster>
-          <h3>8</h3>
-        </Poster>
-        <Poster>
-          <h3>9</h3>
-        </Poster>
-        <Poster>
-          <h3>10</h3>
-        </Poster>
-      </Slider>
+
+      {tabArray.map((tab, index) =>
+        tabIndex === index ? (
+          <Slider {...settings}>
+            {array.map((value, idx) => (
+              <Poster key={`${Poster}${idx}`}>
+                {tab}
+                {value}위
+              </Poster>
+            ))}
+          </Slider>
+        ) : (
+          ""
+        )
+      )}
     </DivTab>
   );
 };
 
 const DivTab = styled.div`
-  width: 100%;
-  height: 300px;
-  border: 1px solid black;
+  width: 1080px;
+  height: max-content;
+
+  .slick-prev:before {
+    opacity: 1; // 기존에 숨어있던 화살표 버튼이 보이게
+    color: black; // 버튼 색은 검은색으로
+    left: 0;
+  }
+  .slick-next:before {
+    opacity: 1;
+    color: black;
+  }
 `;
 
 const ButtonDiv = styled.div`
