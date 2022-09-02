@@ -5,9 +5,9 @@ const RankCard = ({ data, ott }) => {
   return (
     <CardDiv>
       <h1>{ott}</h1>
-      {data.map((v) => (
-        <Rank>{v.title}</Rank>
-      ))}
+      {data.map((v) => {
+        return <Rank {...v}></Rank>;
+      })}
     </CardDiv>
   );
 };
