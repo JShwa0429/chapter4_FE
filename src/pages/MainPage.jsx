@@ -84,8 +84,8 @@ const MainPage = () => {
   return (
     <DivMainPage>
       <Header />
+      <Dots scrollIndex={scrollIndex} />
       <DivOuter ref={outerRef}>
-        <Dots scrollIndex={scrollIndex} />
         <DivInner>
           <Tab />
         </DivInner>
@@ -99,8 +99,7 @@ const MainPage = () => {
 };
 
 const DivMainPage = styled.div`
-  width: 1200px;
-  min-width: 800px;
+  width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -109,21 +108,22 @@ const DivMainPage = styled.div`
 `;
 
 const DivOuter = styled.div`
-  width: 100%;
-  height: 100vh;
+  width: 100vw;
+  height: 200vh;
   overflow-y: auto;
-  align-items: center;
   ::-webkit-scrollbar {
     display: none;
   }
 `;
 
 const DivInner = styled.div`
-  width: 100%;
+  max-width: 1200px;
+  min-width: 800px;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0 auto;
 `;
 
 const Divider = styled.div`

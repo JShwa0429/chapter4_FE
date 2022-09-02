@@ -5,9 +5,9 @@ const Dot = ({ num, scrollIndex }) => {
 };
 
 const DivDot = styled.div`
-  width: 10;
-  height: 10;
-  border: "1px solid black";
+  width: 10px;
+  height: 10px;
+  border: 1px solid black;
   border-radius: 999;
   background-color: ${({ scrollIndex, num }) =>
     scrollIndex === num ? "black" : "transparent"};

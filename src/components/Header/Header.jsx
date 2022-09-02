@@ -21,6 +21,7 @@ const DivHeader = styled.div`
   top: 0;
   max-width: 1200px;
   min-width: 800px;
+  background-color: white;
 `;
 
 const DivLink = styled.div`

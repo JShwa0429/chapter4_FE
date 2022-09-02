@@ -3,7 +3,7 @@ import styled from "styled-components";
 import RankCard from "./RankCard";
 
 const Ranks = () => {
-  const [datas, setDatas] = useState([
+  const [datas] = useState([
     [
       { rank: 1, title: "1제목1" },
       { rank: 2, title: "1제목2" },

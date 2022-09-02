@@ -7,16 +7,15 @@ const Dots = ({ scrollIndex }) => {
       <DivFlex>
         <Dot num={1} scrollIndex={scrollIndex}></Dot>
         <Dot num={2} scrollIndex={scrollIndex}></Dot>
-        <Dot num={3} scrollIndex={scrollIndex}></Dot>
       </DivFlex>
     </DivDots>
   );
 };
 
 const DivDots = styled.div`
-  position: "fixed";
-  top: "50%";
-  right: 100;
+  position: fixed;
+  top: 50%;
+  right: 0%;
 `;
 
 const DivFlex = styled.div`
@@ -24,8 +23,8 @@ const DivFlex = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 20;
-  height: 100;
+  width: 20px;
+  height: 40px;
 `;
 
 export default Dots;

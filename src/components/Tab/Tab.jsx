@@ -19,7 +19,7 @@ const Tab = () => {
     autoplaySpeed: 5000,
     pauseOnHover: true,
   };
-  const tabArray = ["넷플릭스", "왓챠", "티빙"];
+  const tabArray = ["넷플릭스", "왓챠", "티빙", "디즈니플러스"];
   const array = [...Array(10)].map((v, i) => i + 1);
   return (
     <DivTab>
@@ -35,7 +35,7 @@ const Tab = () => {
         tabIndex === index ? (
           <Slider {...settings}>
             {array.map((value, idx) => (
-              <Poster key={`${Poster}${idx}`}>
+              <Poster key={`${Poster}${idx}`} rank={value}>
                 {tab}
                 {value}위
               </Poster>
