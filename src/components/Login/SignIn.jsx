@@ -28,7 +28,7 @@ const SignIn = () => {
           카카오로그인
         </SocialLoginButton>
         <Loginhr />
-        <LoginSignUpButton onClick={() => { navigate("signUp"); }}>
+        <LoginSignUpButton onClick={() => { navigate("signup"); }}>
         회원가입
       </LoginSignUpButton>
       </LoginBox>
