@@ -10,14 +10,22 @@ const SignUp = () => {
       <SignUpDiv>
         <SignUpTitle>Sign Up</SignUpTitle>
         <SignUpSubTitle>이메일</SignUpSubTitle>
-        <SignUpInput></SignUpInput>
+        <SignUpInput
+          type="email"
+        ></SignUpInput>
         <SignUpSubTitle>닉네임</SignUpSubTitle>
-        <SignUpInput></SignUpInput>
-        <SignUpSubTitle>비밀번호</SignUpSubTitle>
-        <SignUpInput></SignUpInput>
+        <SignUpInput
+          type="text"
+        ></SignUpInput>
+        <SignUpSubTitle
+          type="password"
+        >비밀번호</SignUpSubTitle>
+        <SignUpInput
+          type="password"
+        ></SignUpInput>
         <SignUpSubTitle>비밀번호 확인</SignUpSubTitle>
         <SignUpInput></SignUpInput>
-        <SignUpButton onClick={() => { navigate("login"); }}>가입하기</SignUpButton>
+        <SignUpButton onClick={() => { navigate("/login"); }}>가입하기</SignUpButton>
       </SignUpDiv>
     </SignUpLayoutBox>
   );
