@@ -93,6 +93,7 @@ const MainPage = () => {
         <DivInner>
           <Ranks />
         </DivInner>
+        <DivInner>검색 페이지</DivInner>
       </DivOuter>
     </DivMainPage>
   );
@@ -105,15 +106,19 @@ const DivMainPage = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const DivOuter = styled.div`
   width: 100vw;
   height: 200vh;
   overflow-y: auto;
-  ::-webkit-scrollbar {
-    display: none;
-  }
 `;
 
 const DivInner = styled.div`
