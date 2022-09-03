@@ -1,5 +1,4 @@
 import { Header, Ranks, Tab, Dots } from "../components";
-
 import styled from "styled-components";
 import { useRef, useEffect, useState } from "react";
 

@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Poster from "./Poster";
+import {Link} from "react-router-dom";
 
 const Tab = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -29,6 +30,7 @@ const Tab = () => {
             {v}
           </TabButton>
         ))}
+        <Link to="/detail">detail</Link>
       </ButtonDiv>
 
       {tabArray.map((tab, index) =>
