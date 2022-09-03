@@ -1,12 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 import styled from "styled-components";
 import { MainPage } from "./pages";
+import Detail from "./components/detail/Detail"
 
 function App() {
   return (
     <DivApp>
       <Routes>
-        <Route path="/" element={<MainPage />} />
+        <Route path="/" element={<MainPage/>} />
+        <Route path="/detail" element={<Detail/>} />
       </Routes>
     </DivApp>
   );

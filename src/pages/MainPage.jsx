@@ -1,4 +1,4 @@
-import { Header, Tab } from "../components";
+import { Header, Tab} from "../components";
 import styled from "styled-components";
 const MainPage = () => {
   return (

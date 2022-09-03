@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Poster from "./Poster";
+import {Link} from "react-router-dom";
 const Tab = () => {
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -22,6 +23,7 @@ const Tab = () => {
         <TabButton onClick={() => setTabIndex(0)}>넷플릭스</TabButton>
         <TabButton onClick={() => setTabIndex(1)}>왓챠</TabButton>
         <TabButton onClick={() => setTabIndex(2)}>티빙</TabButton>
+        <Link to="/detail">detail</Link>
       </ButtonDiv>
       {tabIndex === 0 && <p>넷플릭스</p>}
       {tabIndex === 1 && <p>왓챠</p>}
