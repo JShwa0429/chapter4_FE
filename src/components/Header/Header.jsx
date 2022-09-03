@@ -17,13 +17,19 @@ const Header = () => {
 
 const DivHeader = styled.div`
   width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 99;
+  max-width: 1200px;
+  min-width: 800px;
+  background-color: white;
 `;
 
 const DivLink = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  width: 15%;
+  width: 10em;
   margin-left: auto;
 `;
 
