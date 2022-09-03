@@ -1,4 +1,4 @@
-import { Header, Ranks, Tab, Dots } from "../components";
+import { Header, Ranks, Tab, Dots, Search } from "../components";
 import styled from "styled-components";
 import { useRef, useEffect, useState } from "react";
 
@@ -92,7 +92,7 @@ const MainPage = () => {
         <DivInner>
           <Ranks />
         </DivInner>
-        <DivInner>검색 페이지</DivInner>
+        <DivInner>{/* <Search /> */}</DivInner>
       </DivOuter>
     </DivMainPage>
   );
