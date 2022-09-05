@@ -7,7 +7,6 @@ const Poster = ({ children, rank }) => {
         <img
           alt={rank}
           className="rank"
-          위
           src={`${process.env.PUBLIC_URL}/images/number${rank}.png`}
         />
       )}

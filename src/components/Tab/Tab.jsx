@@ -1,11 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
-import TabButton from "./TabButton";
+import Button from "../Button/Button";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Poster from "./Poster";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Tab = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -26,16 +26,16 @@ const Tab = () => {
     <DivTab>
       <ButtonDiv>
         {tabArray.map((v, index) => (
-          <TabButton key={`Tab${index}`} onClick={() => setTabIndex(index)}>
+          <Button key={`Tab${index}`} onClick={() => setTabIndex(index)}>
             {v}
-          </TabButton>
+          </Button>
         ))}
         <Link to="/detail">detail</Link>
       </ButtonDiv>
 
       {tabArray.map((tab, index) =>
         tabIndex === index ? (
-          <Slider {...settings}>
+          <Slider {...settings} key={tabIndex}>
             {array.map((value, idx) => (
               <Poster key={`${Poster}${idx}`} rank={value}>
                 {tab}
@@ -53,6 +53,7 @@ const Tab = () => {
 
 const DivTab = styled.div`
   width: 1080px;
+  height: 100vh;
   height: max-content;
 
   .slick-prev:before {

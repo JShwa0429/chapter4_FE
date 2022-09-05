@@ -6,7 +6,7 @@ const RankCard = ({ data, ott }) => {
     <CardDiv>
       <h1>{ott}</h1>
       {data.map((v) => {
-        return <Rank {...v}></Rank>;
+        return <Rank key={v.title} {...v}></Rank>;
       })}
     </CardDiv>
   );
