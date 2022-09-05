@@ -1,9 +1,11 @@
 {
-  "posts": [
+  "user": [
     {
       "id": 1,
-      "title": "json-server",
-      "author": "typicode"
+      "email" : "1234@naver.com",
+      "nickName": "닉네임",
+      "password" : "1234",
+      "passwordConfirm" : "1234"
     }
   ],
   "comments": [

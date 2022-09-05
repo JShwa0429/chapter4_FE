@@ -1,27 +1,77 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { __login } from "../../redux/modules/loginSlice";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+    // 버튼 잠금 state
+  const [formstate, setFromState] = useState(false);
+  // data 입력 state
+  const [loginData, setloginData] = useState({ email: "", password: "" });
+
+  //input 데이터 저장하기
+  const changeInput = (e) => {
+    const { value, id } = e.target;
+    setloginData({ ...loginData, [id]: value });
+  };
+
+  // submit 이벤트
+  const submitLogin = async (e) => {
+    // 새로고침 막기
+    e.preventDefault();
+    // 상태 받아오기 (에러로 받아져서 .....)
+    const loginState = await dispatch(__login(loginData));
+    if (loginState.type === "log/LOGIN_LOG/rejected") {
+      alert("아이디 혹은 비밀번호가 틀렸습니다.");
+    }
+    // 로그인시 환영 인사 후 페이지 이동
+    if (loginState.payload.result) {
+      alert(`${loginState.payload.nickName} 님 환영합니다 :) `);
+      navigate("/");
+    }
+  };
+
+  React.useEffect(() => {
+    // 로그인 버튼 잠금
+    if (loginData.email !== "" && loginData.password !== "") {
+      setFromState(true);
+    } else {
+      setFromState(false);
+    }
+  }, [loginData]);
 
   return (
      <LoginLayoutBox>
-      <LoginBox>
+      <LoginBox onSubmit={submitLogin}>
         <LoginTitle>Login</LoginTitle>
         <LoginIdBox>
           <LoginEmailinput
+            id="email"
             type="email"
+            onChange={changeInput}
             placeholder="이메일"
+            required
           ></LoginEmailinput>
         </LoginIdBox>
         <LoginPwBox>
           <LoginPwinput
+            id="password"
             type="password"
+            onChange={changeInput}
             placeholder="비밀번호"
+            required
           ></LoginPwinput>
         </LoginPwBox>
-        <LoginButton  onClick={() => { navigate("/"); }}>
+        <LoginButton
+          type="submit"
+        size="size1"
+        bgcolor={formstate ? "blue" : "grey"}
+        color={formstate ? "white" : "black"}
+        disabled={!formstate}>
           로그인
         </LoginButton>
         <SocialLoginButton  onClick={() => { navigate("/"); }}>
@@ -45,7 +95,7 @@ const LoginLayoutBox = styled.div`
   justify-content: center;
   align-items: center;
 `
-const LoginBox = styled.div`
+const LoginBox = styled.form`
   background-color:#fff;
   width:400px;
   height: 500px;

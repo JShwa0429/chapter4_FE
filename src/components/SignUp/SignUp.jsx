@@ -1,44 +1,46 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useNavigate } from "react-router-dom";
-import { useState } from 'react';
+import useInput from '../../hooks/useInput';
+
 const SignUp = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [nickName, setNickName] = useState("");
-  const [password, setPassword] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
 
-  // onChangeHandler
-  const onEmailHandler = (event) => {
-    setEmail(event.target.value);
-  };
-   const onNameHandler = (event) => {
-    setNickName(event.target.value);
-  };
-   const onPasswordHandler = (event) => {
-    setPassword(event.target.value);
-  };
-   const onPasswordConfirmHandler = (event) => {
-    setPasswordConfirm(event.target.value);
-  };
+   // onChangeHandler /useInput
+  const [email, setEmail, onChangeEmailHandler] = useInput();
+  const [nickName, setNickName, onChangeNicknameHandler] = useInput();
+  const [password, setPassword, onChangePasswordHandler] = useInput();
+  const [passwordConfirm, setPasswordConfirm, onChangePasswordConfirmHandler] = useInput();
+
 
   const onSubmitHandler = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
+    if (data.password !== data.confirmPassword) {
+      alert('Password mismatch')
+    }
+   
+    dispatch(
+      __addUser({
+        email,
+        nickName,
+        password,
+        passwordConfirm,
+      })
+    );
 
+     navigate("/login")
   };
 
   return (
     <SignUpLayoutBox>
-      <form onSubmit={onSubmitHandler}>
-        <SignUpDiv>
+        <SignUpDiv onSubmit={onSubmitHandler}>
           <SignUpTitle>Sign Up</SignUpTitle>
 
           <SignUpSubTitle>이메일</SignUpSubTitle>
           <SignUpInput
             type="email"
             value={email}
-            onChange={onEmailHandler}
+            onChange={onChangeEmailHandler}
             required
 
           ></SignUpInput>
@@ -47,7 +49,7 @@ const SignUp = () => {
           <SignUpInput
             type="text"
             value={nickName}
-            onChange={onNameHandler}
+            onChange={onChangeNicknameHandler}
             required
 
           ></SignUpInput>
@@ -56,7 +58,7 @@ const SignUp = () => {
           <SignUpInput
             type="password"
             value={password}
-            onChange={onPasswordHandler}
+            onChange={onChangePasswordHandler}
             required
 
           ></SignUpInput>
@@ -65,14 +67,13 @@ const SignUp = () => {
           <SignUpInput
             type="password"
             value={passwordConfirm}
-            onChange={onPasswordConfirmHandler}
+            onChange={onChangePasswordConfirmHandler}
             required
 
           ></SignUpInput>
 
-          <SignUpButton onClick={() => { navigate("/login"); }}>가입하기</SignUpButton>
+          <SignUpButton>가입하기</SignUpButton>
           </SignUpDiv>
-        </form>
       </SignUpLayoutBox>
   );
 };
@@ -84,7 +85,7 @@ const SignUpLayoutBox = styled.div`
   justify-content: center;
   align-items: center;
 `
-const SignUpDiv = styled.div`
+const SignUpDiv = styled.form`
   width:300px;
   overflow:hidden;
   display: flex;
