@@ -6,7 +6,7 @@ import { __getMoviesList } from "../../redux/modules/CommentSlice";
 
 const Detail = () => {
   const dispatch = useDispatch();
-  const [comments, setComments] = useState([
+  const [comments] = useState([
     { id: 0, nickName: "길동이", comment: "안녕하세요" },
     { id: 1, nickName: "발락", comment: "여기가 차붐의 나라입니까..?" },
   ]);
@@ -17,7 +17,7 @@ const Detail = () => {
 
   useEffect(() => {
     dispatch(__getMoviesList());
-  }, []);
+  }, [dispatch]);
 
   //
 
@@ -25,17 +25,20 @@ const Detail = () => {
     <DetailLayout>
       <MoviePosterDate>
         <MoviePoster>
-          {movieData ==undefined ? 
-           "받아온 이미지가 없음"  : 
+          {movieData === undefined ? (
+            "받아온 이미지가 없음"
+          ) : (
             <PosterImg src={`${movieData[1].image}`} />
-          }
+          )}
         </MoviePoster>
         <div>
           <MovieTitle>
-            {movieData ==undefined ? "받아온 제목이 없음" : movieData[1].title}
+            {movieData === undefined
+              ? "받아온 제목이 없음"
+              : movieData[1].title}
           </MovieTitle>
           <MovieContent>
-            {movieData ==undefined ? "받아온 내용이 없음" : movieData[1].desc }
+            {movieData === undefined ? "받아온 내용이 없음" : movieData[1].desc}
           </MovieContent>
         </div>
       </MoviePosterDate>
