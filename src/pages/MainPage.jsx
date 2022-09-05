@@ -1,4 +1,4 @@
-import { Header, Ranks, Tab, Dots, Search, Search } from "../components";
+import { Header, Ranks, Tab, Dots, Search } from "../components";
 import styled from "styled-components";
 import { useRef, useEffect, useState } from "react";
 
