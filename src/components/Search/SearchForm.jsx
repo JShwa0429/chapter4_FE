@@ -15,10 +15,18 @@ const SearchForm = ({ onClick }, ref) => {
 
 const Form = styled.form`
   width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 20%;
   input {
     width: 700px;
     height: 100px;
     font-size: 3em;
+    border-radius: 8px;
+    border: 1px solid black;
   }
 
   button {

@@ -4,7 +4,7 @@ import Rank from "./Rank";
 const RankCard = ({ data, ott }) => {
   return (
     <CardDiv>
-      <h1>{ott}</h1>
+      <img alt={ott} src={`${process.env.PUBLIC_URL}/images/${ott}.png`} />
       {data.map((v) => {
         return <Rank key={v.title} {...v}></Rank>;
       })}
@@ -15,6 +15,9 @@ const RankCard = ({ data, ott }) => {
 const CardDiv = styled.div`
   width: 400px;
   height: 360px;
+  img {
+    height: 40px;
+  }
 `;
 
 export default RankCard;

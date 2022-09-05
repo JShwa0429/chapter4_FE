@@ -92,6 +92,7 @@ const MainPage = () => {
         <DivInner>
           <Ranks />
         </DivInner>
+        <Divider />
         <DivInner>
           <Search />
         </DivInner>
@@ -102,7 +103,6 @@ const MainPage = () => {
 
 const DivMainPage = styled.div`
   width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

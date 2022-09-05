@@ -85,7 +85,15 @@ const Search = () => {
   return (
     <DivSearch>
       <SearchForm ref={searchRef} onClick={handleSearch} />
-      {datas && <SearchResult data={datas.data} />}
+      {datas && (
+        <DivFlex>
+          <h1>
+            {searchRef.current.value}...<small>검색결과</small>
+          </h1>
+
+          <SearchResult data={datas.data} />
+        </DivFlex>
+      )}
     </DivSearch>
   );
 };
@@ -93,10 +101,26 @@ const Search = () => {
 const DivSearch = styled.div`
   width: 100%;
   height: 100vh;
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  h1 {
+    font-size: 3em;
+  }
+  small {
+    font-size: 0.5em;
+  }
+`;
+
+const DivFlex = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 30%;
+  align-items: center;
 `;
 
 export default Search;

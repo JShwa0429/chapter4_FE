@@ -53,7 +53,6 @@ const Tab = () => {
 
 const DivTab = styled.div`
   width: 1080px;
-  height: 100vh;
   height: max-content;
 
   .slick-prev:before {
