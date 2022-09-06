@@ -1,14 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React from "react";
+import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { __login } from "../../redux/modules/loginSlice";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-    // 버튼 잠금 state
+  // 버튼 잠금 state
   const [formstate, setFromState] = useState(false);
   // data 입력 state
   const [loginData, setloginData] = useState({ email: "", password: "" });
@@ -45,7 +45,7 @@ const SignIn = () => {
   }, [loginData]);
 
   return (
-     <LoginLayoutBox>
+    <LoginLayoutBox>
       <LoginBox onSubmit={submitLogin}>
         <LoginTitle>Login</LoginTitle>
         <LoginIdBox>
@@ -68,94 +68,95 @@ const SignIn = () => {
         </LoginPwBox>
         <LoginButton
           type="submit"
-        size="size1"
-        bgcolor={formstate ? "blue" : "grey"}
-        color={formstate ? "white" : "black"}
-        disabled={!formstate}>
+          size="size1"
+          bgcolor={formstate ? "blue" : "grey"}
+          color={formstate ? "white" : "black"}
+          disabled={!formstate}
+        >
           로그인
         </LoginButton>
-        <SocialLoginButton  onClick={() => { navigate("/"); }}>
+        <SocialLoginButton
+          onClick={() => {
+            navigate("/");
+          }}
+        >
           카카오로그인
         </SocialLoginButton>
         <Loginhr />
-        <LoginSignUpButton onClick={() => { navigate("/signup"); }}>
-        회원가입
-      </LoginSignUpButton>
+        <LoginSignUpButton
+          onClick={() => {
+            navigate("/signup");
+          }}
+        >
+          회원가입
+        </LoginSignUpButton>
       </LoginBox>
-
     </LoginLayoutBox>
   );
 };
 
-
 const LoginLayoutBox = styled.div`
-  width:70%;
-  height:100%;
-  display:flex;
+  width: 70%;
+  height: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 const LoginBox = styled.form`
-  background-color:#fff;
-  width:400px;
+  background-color: #fff;
+  width: 400px;
   height: 500px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
-`
+`;
 const LoginTitle = styled.div`
-font-size: 30px;
-font-weight: bold;
-margin-bottom: 30px;
-`
-const LoginIdBox = styled.div`
-`
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 30px;
+`;
+const LoginIdBox = styled.div``;
 
 const LoginEmailinput = styled.input`
   width: 300px;
   height: 40px;
   margin-bottom: 5px;
-  padding:0 10px;
+  padding: 0 10px;
   font-size: 15px;
-`
-const LoginPwBox = styled.div`
-`
+`;
+const LoginPwBox = styled.div``;
 const LoginPwinput = styled.input`
   width: 300px;
   height: 40px;
   margin-bottom: 30px;
-  padding:0 10px;
+  padding: 0 10px;
   font-size: 15px;
-
-`
+`;
 
 const LoginButton = styled.button`
   width: 300px;
   height: 50px;
   margin-bottom: 5px;
   cursor: pointer;
-
-`
+`;
 const SocialLoginButton = styled.button`
-  width:300px;
-  height:50px;
+  width: 300px;
+  height: 50px;
   cursor: pointer;
-
-`
+`;
 const Loginhr = styled.div`
-width:100%;
-margin:50px 0 30px 0;
-border-bottom: 1px solid #999;
-`
+  width: 100%;
+  margin: 50px 0 30px 0;
+  border-bottom: 1px solid #999;
+`;
 
 const LoginSignUpButton = styled.button`
-  border:none;
-  background-color:#fff;
-  width:300px;
-  height:40px;
+  border: none;
+  background-color: #fff;
+  width: 300px;
+  height: 40px;
   cursor: pointer;
-`
+`;
 
 export default SignIn;
