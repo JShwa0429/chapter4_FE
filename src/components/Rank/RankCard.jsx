@@ -13,8 +13,8 @@ const RankCard = ({ data, ott }) => {
 };
 
 const CardDiv = styled.div`
-  width: 400px;
-  height: 360px;
+  height: 25vh;
+  min-width: 400px;
   img {
     height: 40px;
   }
