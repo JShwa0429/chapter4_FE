@@ -1,4 +1,4 @@
-import { Header, Ranks, Tab, Dots } from "../components";
+import { Header, Ranks, Tab, Dots, Search } from "../components";
 import styled from "styled-components";
 import { useRef, useEffect, useState } from "react";
 
@@ -92,6 +92,10 @@ const MainPage = () => {
         <DivInner>
           <Ranks />
         </DivInner>
+        <Divider />
+        <DivInner>
+          <Search />
+        </DivInner>
       </DivOuter>
     </DivMainPage>
   );
@@ -99,20 +103,21 @@ const MainPage = () => {
 
 const DivMainPage = styled.div`
   width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+
+  overflow: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const DivOuter = styled.div`
   width: 100vw;
-  height: 200vh;
   overflow-y: auto;
-  ::-webkit-scrollbar {
-    display: none;
-  }
 `;
 
 const DivInner = styled.div`

@@ -54,7 +54,7 @@ const Ranks = () => {
     ],
   ]);
 
-  const ott = ["넷플릭스", "왓챠", "티빙", "디즈니플러스"];
+  const ott = ["Netflix", "Watcha", "Tving", "Disney Plus"];
   return (
     <DivRanks>
       {datas.map((data, i) => (

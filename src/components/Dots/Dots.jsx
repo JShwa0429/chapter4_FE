@@ -7,6 +7,7 @@ const Dots = ({ scrollIndex }) => {
       <DivFlex>
         <Dot num={1} scrollIndex={scrollIndex}></Dot>
         <Dot num={2} scrollIndex={scrollIndex}></Dot>
+        <Dot num={3} scrollIndex={scrollIndex}></Dot>
       </DivFlex>
     </DivDots>
   );
