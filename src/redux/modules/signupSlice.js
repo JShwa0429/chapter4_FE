@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 // axios 기본 세팅
 import { api } from "../../shared/api";
@@ -9,20 +10,30 @@ import { api } from "../../shared/api";
 export const __signup = createAsyncThunk(
   "signup/SIGNUP_LOG",
   async (payload, thunkAPI) => {
-    const response = await api.post("/user/signup", payload);
-    // const response = await api.get("http://localhost:3001/comments");
+    // const response = await api.post("/user/signup", payload);
+    // const { data } = await axios.post(`http://3.39.231.71/api/user/signup`, payload);
+     const { data } = await api.post("/api/user/signup", payload);
 
     // 회원가입 성공 시 alert & 상태 저장
     alert("회원가입이 완료됐습니다.");
-    return response.data.result;
+    return thunkAPI.fulfillWithValue(data);
   }
 );
+// export const __signup = createAsyncThunk(
+//   "signup/SIGNUP_LOG",
+//   async (payload, thunkAPI) => {
+//     const response = await api.post("/api/user/signup", payload);
 
+//     // 회원가입 성공 시 alert & 상태 저장
+//     alert("회원가입이 완료됐습니다.");
+//     return response.data.result;
+//   }
+// );
 // 아이디 중복확인
 export const __checkUsername = createAsyncThunk(
   "signup/CHECKID_LOG",
   async (payload, thunkAPI) => {
-    const response = await api.get(`/user/email/${payload}`);
+    const response = await axios.get(`/user/email/${payload}`);
     // 중복확인 결과에 따라 alert 후 상태 저장
     if (!response.data.result) alert("동일한 아이디가 존재합니다");
     return response.data.result;

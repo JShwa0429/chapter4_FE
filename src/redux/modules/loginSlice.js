@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 // axios 기본 세팅
 import { api } from "../../shared/api";
@@ -6,14 +7,23 @@ import { api } from "../../shared/api";
 // // thunk 함수
 
 // 로그인
+// export const __login = createAsyncThunk(
+//   "log/LOGIN_LOG",
+//   async (payload, thunkAPI) => {
+//     const response = await api.post("/user/login", payload);
+//     // 토큰 localstorge 저장하기
+//     localStorage.setItem("token", response.data.token);
+//     // 로그인 상태 값 {true / false}
+//     return response.data;
+//   }
+// );
 export const __login = createAsyncThunk(
   "log/LOGIN_LOG",
   async (payload, thunkAPI) => {
-    const response = await api.post("/user/login", payload);
-    // 토큰 localstorge 저장하기
-    localStorage.setItem("token", response.data.token);
-    // 로그인 상태 값 {true / false}
-    return response.data;
+
+    const { data } = await api.post("/api/user/login", payload)
+	
+    return thunkAPI.fulfillWithValue(data);
   }
 );
 // 재 접속시 토큰 유효기간 확인
@@ -52,7 +62,7 @@ const loginSlice = createSlice({
       .addCase(__login.fulfilled, (state, action) => {
         state.loading = false;
         state.user = {
-          nickName: action.payload.nickname,
+          nickName: action.payload.nickName,
           result: action.payload.result,
         };
       })

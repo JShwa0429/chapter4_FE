@@ -12,13 +12,12 @@
 //   const [password, setPassword, onChangePasswordHandler] = useInput();
 //   const [passwordConfirm, setPasswordConfirm, onChangePasswordConfirmHandler] = useInput();
 
-
 //   const onSubmitHandler = (e) => {
 //     // e.preventDefault();
 //     if (data.password !== data.confirmPassword) {
 //       alert('Password mismatch')
 //     }
-   
+
 //     dispatch(
 //       __addUser({
 //         email,
@@ -36,7 +35,6 @@ import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-
 //모듈
 import {
   changeCheckName,
@@ -48,10 +46,10 @@ import {
 
 //회원가입 form 컴포넌트
 export default function SignUpForm() {
-  // // 이름 중복확인 상태 값 가져오기 기본 값 false
-  // const checkName = useSelector((state) => state.signup.checkName);
-  // // 닉네임 중복확인 상태 값 가져오기 기본 값 false
-  // const checkNick = useSelector((state) => state.signup.checkNick);
+  // 이름 중복확인 상태 값 가져오기 기본 값 false
+  const checkName = useSelector((state) => state.signup.checkName);
+  // 닉네임 중복확인 상태 값 가져오기 기본 값 false
+  const checkNick = useSelector((state) => state.signup.checkNick);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   // 버튼 활성화 상태
@@ -59,15 +57,15 @@ export default function SignUpForm() {
   // 보낼 데이터 상태관리
   const [signData, setsignData] = useState({
     email: "",
-    nickname: "",
+    nickName: "",
     password: "",
-    passwordCheck: "",
+    passwordConfirm: "",
   });
 
   // 이메일, 닉네임, 비밀번호 조건 통과 상태
   // const email = checkName;
   // const nick = checkNick;
-  // const [pw, setPw] = useState(false);
+  const [pw, setPw] = useState(false);
 
   //input 데이터 저장하기
   const changeInput = (e) => {
@@ -75,7 +73,7 @@ export default function SignUpForm() {
     setsignData({ ...signData, [id]: value });
     // 중복 확인 후 데이터 변경시 상태 false로 변환하는 action 실행
     if (id === "email") dispatch(changeCheckName());
-    if (id === "nickname") dispatch(changeCheckNick());
+    if (id === "nickName") dispatch(changeCheckNick());
   };
 
   // 회원가입 이벤트
@@ -88,25 +86,25 @@ export default function SignUpForm() {
     }
   };
 
-  // // 중복확인 이벤트
+  // 중복확인 이벤트
   // const CheckId = () => {
-  //     dispatch(__checkUsername(signData.email));
+  //   dispatch(__checkUsername(signData.email));
   // };
   // const CheckNick = () => {
-  //   dispatch(__checkNickname(signData.nickname));
+  //   dispatch(__checkNickname(signData.nickName));
   // };
 
-  // React.useEffect(() => {
-  //   // 비밀번호 일치 조건 확인
-  //   if (
-  //     signData.passwordCheck === signData.password &&
-  //     signData.password !== ""
-  //   ) {
-  //     setPw(true);
-  //   } else {
-  //     setPw(false);
-  //   }
-  // }, [signData]);
+  React.useEffect(() => {
+    // 비밀번호 일치 조건 확인
+    if (
+      signData.passwordCheck === signData.password &&
+      signData.password !== ""
+    ) {
+      setPw(true);
+    } else {
+      setPw(false);
+    }
+  }, [signData]);
 
   // React.useEffect(() => {
   //   // 3개 조건 확인 후 버튼 활성화
@@ -119,106 +117,107 @@ export default function SignUpForm() {
 
   return (
     <SignUpLayoutBox>
-        <SignUpDiv onSubmit={submitLogin}>
-          <SignUpTitle>Sign Up</SignUpTitle>
+      <SignUpDiv onSubmit={submitLogin}>
+        <SignUpTitle>Sign Up</SignUpTitle>
 
         <SignUpSubTitle>
           이메일
-           {/* <CheckText color={email ? "blue" : "red"}>
+          {/* <CheckText color={email ? "blue" : "red"}>
               {email ? "중복 확인" : "중복 확인을 해주세요"}
           </CheckText>
              <CheckBtn onClick={CheckId}>중복 확인</CheckBtn> */}
-          </SignUpSubTitle>
-          <SignUpInput
+        </SignUpSubTitle>
+        <SignUpInput
           type="email"
           id="email"
-            onChange={changeInput}
-            required
-          ></SignUpInput>
+          onChange={changeInput}
+          required
+        ></SignUpInput>
 
-        <SignUpSubTitle>닉네임
-           {/* <CheckText color={nick ? "blue" : "red"}>
+        <SignUpSubTitle>
+          닉네임
+          {/* <CheckText color={nick ? "blue" : "red"}>
               {nick ? "중복 확인" : "중복 확인을 해주세요"}
           </CheckText>
            <CheckBtn onClick={CheckNick}>중복 확인</CheckBtn> */}
-          </SignUpSubTitle>
-          <SignUpInput
+        </SignUpSubTitle>
+        <SignUpInput
           type="text"
-                    id="nickname"
-            onChange={changeInput}
-            required
+          id="nickName"
+          onChange={changeInput}
+          required
+        ></SignUpInput>
 
-          ></SignUpInput>
-
-          <SignUpSubTitle>비밀번호</SignUpSubTitle>
-          <SignUpInput
-            type="password"
+        <SignUpSubTitle>비밀번호</SignUpSubTitle>
+        <SignUpInput
+          type="password"
           id="password"
-            onChange={changeInput}
-            required
+          onChange={changeInput}
+          required
+        ></SignUpInput>
 
-          ></SignUpInput>
-
-        <SignUpSubTitle>비밀번호 확인
-            {/* <CheckText color={pw ? "blue" : "red"}>
+        <SignUpSubTitle>
+          비밀번호 확인
+          {/* <CheckText color={pw ? "blue" : "red"}>
             {pw ? "비밀 번호가 일치합니다" : "비밀 번호가 일치하지 않습니다"} */}
           {/* </CheckText> */}
-          </SignUpSubTitle>
+        </SignUpSubTitle>
         <SignUpInput
-            id="passwordConfirm"
-            type="password"
-            onChange={changeInput}
-            required
-
-          ></SignUpInput>
+          id="passwordConfirm"
+          type="password"
+          onChange={changeInput}
+          required
+        ></SignUpInput>
 
         <SignUpButton
-         type="submit"
+        // type="submit"
         // bgcolor={formstate ? "blue" : "grey"}
         // color={formstate ? "white" : "black"}
         // disabled={!formstate}
-        >가입하기</SignUpButton>
-          </SignUpDiv>
-      </SignUpLayoutBox>
+        // onClick={CheckNick}
+        >
+          가입하기
+        </SignUpButton>
+      </SignUpDiv>
+    </SignUpLayoutBox>
   );
-};
+}
 
 const SignUpLayoutBox = styled.div`
-  width:70%;
-  height:100%;
-  display:flex;
+  width: 70%;
+  height: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 const SignUpDiv = styled.form`
-  width:300px;
-  overflow:hidden;
+  width: 300px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: center;
-`
+`;
 const SignUpTitle = styled.div`
-font-size: 30px;
-font-weight: bold;
-margin: 0 auto 30px;
-`
+  font-size: 30px;
+  font-weight: bold;
+  margin: 0 auto 30px;
+`;
 const SignUpSubTitle = styled.div`
   display: flex;
-
-`
+`;
 const SignUpInput = styled.input`
   width: 300px;
   height: 40px;
   margin: 10px 0;
-  padding:0 10px;
+  padding: 0 10px;
   font-size: 15px;
-`
+`;
 const SignUpButton = styled.button`
   width: 300px;
   height: 50px;
   cursor: pointer;
-  margin-top:30px;
-`
+  margin-top: 30px;
+`;
 
 const CheckBtn = styled.div`
   display: flex;
@@ -350,8 +349,8 @@ const CheckText = styled.span`
 // `;
 
 // const Input = styled.input`
-  
+
 // `
 // const Button = styled.button`
-  
+
 // `
