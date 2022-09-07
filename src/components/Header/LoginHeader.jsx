@@ -23,6 +23,7 @@ const LoginHeaderBox =styled.div`
 const LoginHeaderTitle = styled.div`
 font-size:50px;
 font-weight:bold;
+cursor: pointer;
 `
 
 export default LoginHeader;
