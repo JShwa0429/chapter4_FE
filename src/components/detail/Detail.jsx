@@ -1,56 +1,75 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
+import { PlusSquareTwoTone } from "@ant-design/icons";
 
-import { __getMoviesList } from "../../redux/modules/CommentSlice";
+import EditButton from "./EditButton";
+import { __getMoviesList } from "../../redux/modules/MovieSlice";
+import {
+  __getCommentList,
+  __removeComment,
+  addComment,
+} from "../../redux/modules/CommentSlice";
 
 const Detail = () => {
   const dispatch = useDispatch();
+  const inputRef = useRef(0);
   const [comments, setComments] = useState([
-    { id: 0, nickName: "길동이", comment: "안녕하세요" },
-    { id: 1, nickName: "발락", comment: "여기가 차붐의 나라입니까..?" },
+    {
+      id: 2,
+      nickName: "소크라테스",
+      editCheck: false,
+      likes: 0,
+      dislikes: 0,
+      dislikeCheck: false,
+    },
   ]);
-
-  const movieData = useSelector((state) => state.movie.movie);
-
-  console.log(movieData);
-
+  const [newMovieData, setNewMovieData] = useState(null);
+  const commentData = useSelector((state) => state.comment.comment);
+  console.log("렌더링 1번째")
+  
   useEffect(() => {
-    dispatch(__getMoviesList());
+    dispatch(__getCommentList());
+    console.log("렌더링 2번째")
   }, []);
 
-  //
+  
 
+  const addButton = (inputRef) => {
+    if (comments.accessToken == 1) {
+      window.alert("로그인 후 이용해주세요");
+    } else {
+      if (inputRef.current.value == "") {
+        window.alert("댓글을 입력해주세요!");
+      } else {
+        dispatch(
+          addComment({ ...comments[0], id:++comments[0].id ,content: inputRef.current.value })
+        );
+      }
+    }
+  };
+  console.log(commentData)
+  // <PosterImg src={movieData[0].data.imgUrl} />
+  // <MovieTitle>{movieData[0].data.title}</MovieTitle>
+  // <MovieContent>{movieData[0].data.detail}</MovieContent>
   return (
     <DetailLayout>
       <MoviePosterDate>
-        <MoviePoster>
-          {movieData ==undefined ? 
-           "받아온 이미지가 없음"  : 
-            <PosterImg src={`${movieData[1].image}`} />
-          }
-        </MoviePoster>
+  <MoviePoster>{commentData? null :<PosterImg src={commentData[0].imgUrl} />}</MoviePoster>
         <div>
-          <MovieTitle>
-            {movieData ==undefined ? "받아온 제목이 없음" : movieData[1].title}
-          </MovieTitle>
-          <MovieContent>
-            {movieData ==undefined ? "받아온 내용이 없음" : movieData[1].desc }
-          </MovieContent>
+        {commentData? null :<MovieTitle>{commentData[0].title}</MovieTitle>}
+        {commentData? null :<MovieContent>{commentData[0].detail}</MovieContent>}
         </div>
       </MoviePosterDate>
-      <CommentsLayout>
-        {comments.map((list) => (
-          <Comment key={list.id}>
-            <CommentContent>
-              <div>{list.nickName}</div>
-              <div>{list.comment}</div>
-            </CommentContent>
-            <Button>수정</Button>
-            <Button>❌</Button>
-          </Comment>
-        ))}
-      </CommentsLayout>
+      <div style={{ flexDirection: "row" }}>
+        <AddCommentInput ref={inputRef} placeholder={"댓글을 추가해보세요!"} />
+        <PlusSquareTwoTone
+          onClick={() => addButton(inputRef)}
+          style={{ fontSize: "30px", float: "right", marginRight: "30px" }}
+        />
+      </div>
+
+      <EditButton />
     </DetailLayout>
   );
 };
@@ -60,11 +79,12 @@ export default Detail;
 const DetailLayout = styled.div`
   max-width: 1200px;
   min-width: 800px;
-  height: 600px;
+  height: 800px;
   border: 2px solid;
   display: flex;
   flex-direction: column;
   align-items: left;
+  margin: auto;
 `;
 
 const MoviePosterDate = styled.div`
@@ -99,48 +119,28 @@ const MovieTitle = styled.h2`
   width: 450px;
   height: 50px;
   border: none;
-  margin-top: 30px;
+  margin-top: 20px;
   margin-left: 35px;
   text-align: center;
 `;
 const MovieContent = styled.p`
-  width: 450px;
-  height: 180px;
+  width: 510px;
+  height: 200px;
   border: 2px solid black;
-  margin-left: 35px;
+  margin:auto;
+  margin-left: 5px;
   margin-top: 20px;
   text-align: center;
+  overflow:hidden;
+  text-overflow: ellipsis;
 `;
-const CommentsLayout = styled.p`
-  width: 735px;
-  height: 600px;
+
+const AddCommentInput = styled.input`
+  width: 500px;
+  height: 30px;
+  border-radius: 20px;
   border: 2px solid black;
-  margin: auto;
+  margin-left: 30px;
   margin-bottom: 10px;
   text-align: center;
-`;
-const Comment = styled.div`
-  width: 700px;
-  border: 2px solid black;
-  margin: auto;
-  margin-top: 5px;
-  text-align: left;
-  display: flex;
-  flex-direction: row;
-`;
-
-const CommentContent = styled.div`
-  width: 600px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Button = styled.button`
-  width: 40px;
-  height: 40px;
-  margin-left: 5px;
-  margin-top: 2px;
-  align-items: center;
-  border: none;
-  border-radius: 10px;
 `;
