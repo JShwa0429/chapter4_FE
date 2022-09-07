@@ -2,10 +2,26 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Header = () => {
+  const logout = () => {
+    window.localStorage.removeItem("refresh-token");
+    navigator("/");
+  };
+
   return (
     <DivHeader>
       <DivLink>
-        <Link to="/login">로그인</Link>
+        {localStorage.length ? (
+          <Link
+            to="/"
+            onClick={() => {
+              logout();
+            }}
+          >
+            로그아웃
+          </Link>
+        ) : (
+          <Link to="/login">로그인</Link>
+        )}
         <Link to="/signUp">회원가입</Link>
       </DivLink>
       <DivTitle>

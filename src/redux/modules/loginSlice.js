@@ -7,25 +7,27 @@ import { api } from "../../shared/api";
 // // thunk 함수
 
 // 로그인
-// export const __login = createAsyncThunk(
-//   "log/LOGIN_LOG",
-//   async (payload, thunkAPI) => {
-//     const response = await api.post("/user/login", payload);
-//     // 토큰 localstorge 저장하기
-//     localStorage.setItem("token", response.data.token);
-//     // 로그인 상태 값 {true / false}
-//     return response.data;
-//   }
-// );
 export const __login = createAsyncThunk(
   "log/LOGIN_LOG",
   async (payload, thunkAPI) => {
+    const response = await api.post("/api/user/login", payload);
+    // 토큰 localstorge 저장하기
+    localStorage.setItem("refresh-token", response.headers["refresh-token"]);
 
-    const { data } = await api.post("/api/user/login", payload)
-	
-    return thunkAPI.fulfillWithValue(data);
+    return response.data;
   }
 );
+
+// export const __login = createAsyncThunk(
+//   "log/LOGIN_LOG",
+//   async (payload, thunkAPI) => {
+
+//     const { data } = await api.post("/api/user/login", payload)
+// 	localStorage.setItem("refresh-token", response.data.token);
+//     return thunkAPI.fulfillWithValue(data);
+    
+//   }
+// );
 // 재 접속시 토큰 유효기간 확인
 export const __checkToken = createAsyncThunk(
   "__checkToken/CHECK_LOG",

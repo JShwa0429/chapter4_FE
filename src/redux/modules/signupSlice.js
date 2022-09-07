@@ -10,7 +10,6 @@ import { api } from "../../shared/api";
 export const __signup = createAsyncThunk(
   "signup/SIGNUP_LOG",
   async (payload, thunkAPI) => {
-    // const response = await api.post("/user/signup", payload);
     // const { data } = await axios.post(`http://3.39.231.71/api/user/signup`, payload);
      const { data } = await api.post("/api/user/signup", payload);
 
@@ -33,7 +32,9 @@ export const __signup = createAsyncThunk(
 export const __checkUsername = createAsyncThunk(
   "signup/CHECKID_LOG",
   async (payload, thunkAPI) => {
-    const response = await axios.get(`/user/email/${payload}`);
+    // const response = await axios.get(`user/email/${payload}`);
+    const response = await axios.get("api/user/signup/${payload}");
+console.log(response)
     // 중복확인 결과에 따라 alert 후 상태 저장
     if (!response.data.result) alert("동일한 아이디가 존재합니다");
     return response.data.result;
