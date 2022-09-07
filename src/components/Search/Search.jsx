@@ -13,9 +13,9 @@ const Search = () => {
     console.log(contentName);
     axios
       .get(
-        `https://localhost:3000/api/auth/movie/search?contentName=${contentName}`
+        `http://3.39.231.71//api/auth/movie/search?contentName=${contentName}`
       )
-      .then((res) => setDatas(res.data))
+      .then((res) => console.log(res.data))
       .catch(() =>
         setDatas({
           success: true,

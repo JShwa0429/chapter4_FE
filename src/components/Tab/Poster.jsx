@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Poster = ({ children, rank }) => {
+const Poster = ({ children, rank, imgUrl }) => {
   return (
     <DivPoster>
       {rank < 4 && (
@@ -10,10 +10,7 @@ const Poster = ({ children, rank }) => {
           src={`${process.env.PUBLIC_URL}/images/number${rank}.png`}
         />
       )}
-      <Img
-        alt={"포스터"}
-        src="https://movie-phinf.pstatic.net/20220509_176/1652081912471yhg3N_JPEG/movie_image.jpg"
-      />
+      <Img alt={"포스터"} src={imgUrl} />
       <h1>{children}</h1>
     </DivPoster>
   );

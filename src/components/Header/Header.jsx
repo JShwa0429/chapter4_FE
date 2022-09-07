@@ -9,7 +9,7 @@ const Header = () => {
         <Link to="/signUp">회원가입</Link>
       </DivLink>
       <DivTitle>
-        <h1> OTT TOP TEN </h1>
+        <h1> OTT TOP FIVE </h1>
       </DivTitle>
     </DivHeader>
   );

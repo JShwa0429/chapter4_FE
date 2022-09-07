@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../Button/Button";
 import Slider from "react-slick";
@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Poster from "./Poster";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Tab = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -20,8 +21,24 @@ const Tab = () => {
     autoplaySpeed: 5000,
     pauseOnHover: true,
   };
-  const tabArray = ["넷플릭스", "왓챠", "티빙", "디즈니플러스"];
-  const array = [...Array(10)].map((v, i) => i + 1);
+  const tabArray = ["NETFLIX", "WATCHA", "TVING", "DISNEY +"];
+  const array = [...Array(5)].map((v, i) => i + 1);
+
+  const [datas, setDatas] = useState([]);
+
+  useEffect(() => {
+    const getDatas = async () => {
+      await axios
+        .get("http://3.39.231.71/api/movie")
+        .then((res) => setDatas(res.data.data));
+    };
+    getDatas();
+  }, []);
+
+  useEffect(() => {
+    console.log("데이터", datas);
+  }, [datas]);
+
   return (
     <DivTab>
       <ButtonDiv>
@@ -36,12 +53,17 @@ const Tab = () => {
       {tabArray.map((tab, index) =>
         tabIndex === index ? (
           <Slider {...settings} key={tabIndex}>
-            {array.map((value, idx) => (
-              <Poster key={`${Poster}${idx}`} rank={value}>
-                {tab}
-                {value}위
-              </Poster>
-            ))}
+            {datas
+              .filter((v) => v.platform === tab)
+              .map((value, idx) => (
+                <Poster
+                  key={`${Poster}${idx}`}
+                  rank={value.rank}
+                  imgUrl={value.imgUrl}
+                >
+                  {value.title}
+                </Poster>
+              ))}
           </Slider>
         ) : (
           ""
