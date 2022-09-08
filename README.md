@@ -9,10 +9,12 @@
 
 ## 프로젝트 기간
 2022.09.02 - 2022.09.08
+
 이노베이션 캠프 Chapter4 미니 프로젝트
 
 ## 팀원
 FE : 홍준형, 조무제, 유민아
+
 BE : 유연정, 김학준 
 ( BE Github : https://github.com/innovation-w6/innovation_w6 )
 
