@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Poster from "./Poster";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Tab = () => {
@@ -39,11 +39,17 @@ const Tab = () => {
     console.log("데이터", datas);
   }, [datas]);
 
+  const navigate = useNavigate();
+
   return (
     <DivTab>
       <ButtonDiv>
         {tabArray.map((v, index) => (
-          <Button key={`Tab${index}`} onClick={() => setTabIndex(index)}>
+          <Button
+            key={`Tab${index}`}
+            className={index === tabIndex ? "active" : ""}
+            onClick={() => setTabIndex(index)}
+          >
             {v}
           </Button>
         ))}
@@ -60,6 +66,7 @@ const Tab = () => {
                   key={`${Poster}${idx}`}
                   rank={value.rank}
                   imgUrl={value.imgUrl}
+                  onClick={() => navigate(value.id)}
                 >
                   {value.title}
                 </Poster>
@@ -92,8 +99,13 @@ const ButtonDiv = styled.div`
   button {
     width: 150px;
     height: 30px;
-    border: 1px solid black;
+
     border-radius: 0;
+  }
+
+  .active {
+    background-color: black;
+    color: red;
   }
 `;
 
