@@ -3,9 +3,19 @@ import { Button } from "../Button";
 import { forwardRef } from "react";
 
 const SearchForm = ({ onClick }, ref) => {
+  const handleOnKeyPress = (e) => {
+    if (e.key === "Enter") {
+      onClick();
+    }
+  };
   return (
-    <Form>
-      <input type="text" ref={ref} placeholder="띄어쓰기를 지켜주세요" />
+    <Form onSubmit={(e) => e.preventDefault()}>
+      <input
+        type="text"
+        ref={ref}
+        placeholder="띄어쓰기를 지켜주세요"
+        onKeyPress={handleOnKeyPress}
+      />
       <Button type="button" onClick={onClick}>
         검색
       </Button>

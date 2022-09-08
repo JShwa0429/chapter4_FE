@@ -6,8 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Poster from "./Poster";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { EyeTwoTone } from "@ant-design/icons";
+import { api } from "../../shared/api";
 
 const Tab = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -23,21 +22,17 @@ const Tab = () => {
     pauseOnHover: true,
   };
   const tabArray = ["NETFLIX", "WATCHA", "TVING", "DISNEY +"];
-  const array = [...Array(5)].map((v, i) => i + 1);
 
   const [datas, setDatas] = useState([]);
 
   useEffect(() => {
     const getDatas = async () => {
-      await axios
-        .get("http://3.39.231.71/api/movie")
-        .then((res) => setDatas(res.data.data));
+      await api.get("/api/movie").then((res) => setDatas(res.data.data));
     };
     getDatas();
   }, []);
 
-  useEffect(() => {
-  }, [datas]);
+  useEffect(() => {}, [datas]);
 
   const navigate = useNavigate();
 
