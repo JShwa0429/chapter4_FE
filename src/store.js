@@ -9,7 +9,7 @@ const middlewares = [thunk];
 const rootReducer = combineReducers({
   login: loginReducer,
   signup: signupReducer,
-  rank: rankReducer,
+  rank: rankReducer
 });
 // 스토어 연결
 const store = configureStore({

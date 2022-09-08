@@ -10,7 +10,6 @@ const Search = () => {
   const [datas, setDatas] = useState(null);
   const handleSearch = (e) => {
     const contentName = searchRef.current.value;
-    console.log(contentName);
     axios
       .get(`/api/auth/movie/search?contentName=${contentName}`)
       .then((res) => console.log(res))
@@ -79,7 +78,6 @@ const Search = () => {
       );
   };
   useEffect(() => {
-    console.log(datas);
   }, [datas]);
   return (
     <DivSearch>
