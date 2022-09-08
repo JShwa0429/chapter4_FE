@@ -32,6 +32,7 @@ const Tab = () => {
     getDatas();
   }, []);
 
+<<<<<<< Updated upstream
   useEffect(() => {}, [datas]);
 
   const navigate = useNavigate();
@@ -42,6 +43,12 @@ const Tab = () => {
     navigate(`/detail/${e.target.id}`);
   };
 
+=======
+
+  const navigate = useNavigate();
+
+  console.log(datas)
+>>>>>>> Stashed changes
   return (
     <DivTab>
       <ButtonDiv>
@@ -54,7 +61,6 @@ const Tab = () => {
             {v}
           </Button>
         ))}
-        <Link to="/detail">detail</Link>
       </ButtonDiv>
 
       {tabArray.map((tab, index) =>
@@ -65,10 +71,15 @@ const Tab = () => {
               .map((value, idx) => (
                 <Poster
                   key={`${Poster}${idx}`}
+                  id={value.id}
                   rank={value.rank}
                   imgUrl={value.imgUrl}
+<<<<<<< Updated upstream
                   id={value.id}
                   onClick={handleMoveToDetail}
+=======
+                  onClick={() => navigate(`/detail/${value.id}`)}
+>>>>>>> Stashed changes
                 >
                   {value.title}
                 </Poster>

@@ -11,7 +11,7 @@ const MainPage = () => {
   useEffect(() => {
     dispatch(__getRankList());
   }, [dispatch]);
-
+  
   useEffect(() => {
     const wheelHandler = (e) => {
       e.preventDefault();

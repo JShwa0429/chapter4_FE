@@ -1,13 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 
 import { api } from "../../shared/api";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch} from "react-redux";
 import { PlusSquareOutlined } from "@ant-design/icons";
 
 import EditButton from "./EditButton";
-import { __getMoviesList } from "../../redux/modules/MovieSlice";
 import {
   __getCommentList,
   __addComment,
@@ -15,38 +14,17 @@ import {
 
 const Detail = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const inputRef = useRef(0);
-  const [comments, setComments] = useState([]);
+  const movieid = useParams();
   const [findToken, setFindToken] = useState(null);
   const [movieData, setMovieData] = useState(null);
 
+const getDatas = async () => {
+    await api.get(`/api/movie/${movieid.id}`).then((res) => setMovieData(res.data.data));
+    await api.get(`/api/movie/${movieid.id}`).then((res) => setFindToken(res));}
+
   useEffect(() => {
-    const getDatas = async () => {
-      await api.get(`/api/movie/1`).then((res) => setMovieData(res.data.data));
-    };
     getDatas();
   }, []);
-
-  const addButton = (inputRef) => {
-    if (comments.accessToken == 1) {
-      window.alert("로그인 후 이용해주세요");
-      navigate("/login");
-    } else {
-      if (inputRef.current.value == "") {
-        window.alert("댓글을 입력해주세요!");
-      } else {
-        dispatch(
-          __addComment({
-            ...comments,
-            id: movieData.id,
-            content: inputRef.current.value,
-          })
-        );
-      }
-    }
-  };
-  useEffect(() => {}, [addButton]);
 
   return (
     <div>
@@ -73,17 +51,6 @@ const Detail = () => {
             )}
           </div>
         </MoviePosterData>
-        <div style={{ flexDirection: "row" }}>
-          <AddCommentInput
-            ref={inputRef}
-            placeholder={"댓글을 추가해보세요!"}
-          />
-          <PlusSquareOutlined
-            onClick={() => addButton(inputRef)}
-            style={{ fontSize: "30px", float: "right", marginRight: "50px" }}
-          />
-        </div>
-
         <EditButton />
       </DetailLayout>
     </div>
@@ -149,7 +116,7 @@ const MoviePoster = styled.div`
 const PosterImg = styled.img`
   width: 198px;
   height: 282px;
-  margin: 0px;
+  margin-top: 4px;
   text-align: center;
   border-radius: 7px;
 `;
@@ -172,17 +139,4 @@ const MovieContent = styled.p`
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
-`;
-
-const AddCommentInput = styled.input`
-  width: 500px;
-  height: 30px;
-  color: white;
-  font-weight: bold;
-  background-color: black;
-  border-radius: 6px;
-  border: 1px solid white;
-  margin-left: 50px;
-  margin-bottom: 10px;
-  text-align: center;
 `;

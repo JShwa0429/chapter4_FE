@@ -12,8 +12,12 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="signup" element={<SignUpPage />} />
+<<<<<<< Updated upstream
         <Route path="/detail" element={<Detail />} />
         <Route path="/detail/:id" element={<Detail />} />
+=======
+        <Route path="/detail/:id" element={<Detail/>} />
+>>>>>>> Stashed changes
       </Routes>
     </DivApp>
   );

@@ -1,11 +1,32 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
+<<<<<<< Updated upstream
 const Poster = ({ children, id, rank, imgUrl, onClick }) => {
   return (
     <DivPoster id={id} onClick={onClick}>
       <RankDiv id={id}>{rank}위</RankDiv>
       <Img id={id} alt={"포스터"} src={imgUrl} />
       <h1 id={id}>{children}</h1>
+=======
+const Poster = ({ children, rank, imgUrl,id }) => {
+  const navigate = useNavigate();
+  console.log(id,children)
+  return (
+    <DivPoster >
+      {rank < 4 && (
+        <img
+          id={id}
+          alt={rank}
+          className="rank"
+          src={`${process.env.PUBLIC_URL}/images/number${rank}.png`}
+        />
+      )}
+      <Img alt={"포스터"} src={imgUrl}onClick={() => {
+            navigate(`/detail/${id}`);
+          }}  />
+      <h1>{children}</h1>
+>>>>>>> Stashed changes
     </DivPoster>
   );
 };

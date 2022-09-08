@@ -19,7 +19,6 @@ export const RankSlice = createSlice({
   reducers: {},
   extraReducers: {
     [__getRankList.fulfilled]: (state, action) => {
-      console.log(action.payload.data);
       state.rank = action.payload.data;
     },
   },

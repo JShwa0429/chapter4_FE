@@ -3,38 +3,7 @@ import axios from "axios";
 import {api} from "../../shared/api"
 
 const initialState = {
-  comment: [
-    // {
-    //   id: 0,
-    //   accessToken: true,
-    //   nickName: "길동이",
-    //   content: "저는 어디에도 있고 어디에도 없습니다.",
-    //   editCheck: false,
-    //   dislikeCheck: false,
-    //   likes: 0,
-    //   dislike: 0,
-    // },
-    // {
-    //   id: 1,
-    //   accessToken: false,
-    //   nickName: "발락",
-    //   content: "여기가 차붐의 나라입니까..?",
-    //   editCheck: false,
-    //   dislikeCheck: false,
-    //   likes: 0,
-    //   dislikes: 0,
-    // },
-    // {
-    //   id: 2,
-    //   accessToken: false,
-    //   nickName: "예수그리스도",
-    //   content: '"AMEN"',
-    //   editCheck: false,
-    //   dislikeCheck: false,
-    //   likes: 0,
-    //   dislikes: 0,
-    // },
-  ],
+  comment: [],
 };
 
 export const __getCommentList = createAsyncThunk(
@@ -50,11 +19,10 @@ export const __getCommentList = createAsyncThunk(
 export const __addComment = createAsyncThunk("ADD_COMMENT", async (payload, thunkAPI) => {
   console.log(payload)
    const sendContent ={content:payload.content};
-  const { data } = await api.post(`api/auth/comment?movieId=1`, sendContent);
+  const { data } = await api.post(`api/auth/comment?movieId=${payload.id}`, sendContent);
   return thunkAPI.fulfillWithValue(data);
 });
 
-//${payload.id} {content:payload.content}
 export const __removeComment = createAsyncThunk(
   "REMOVE_COMMENT",
   async (payload, thunkAPI) => {
