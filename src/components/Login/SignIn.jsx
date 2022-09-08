@@ -107,6 +107,10 @@ const LoginEmailinput = styled.input`
   margin-bottom: 5px;
   padding: 0 10px;
   font-size: 15px;
+  ::placeholder {
+    font-size: 12px;
+    color: #a5a5a5;
+  }
 `;
 const LoginPwBox = styled.div``;
 const LoginPwinput = styled.input`
@@ -115,6 +119,10 @@ const LoginPwinput = styled.input`
   margin-bottom: 30px;
   padding: 0 10px;
   font-size: 15px;
+  ::placeholder {
+    font-size: 12px;
+    color: #a5a5a5;
+  }
 `;
 
 const LoginButton = styled.button`

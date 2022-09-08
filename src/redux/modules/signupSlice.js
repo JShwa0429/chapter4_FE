@@ -8,7 +8,6 @@ import { api } from "../../shared/api";
 export const __signup = createAsyncThunk(
   "signup/SIGNUP_LOG",
   async (payload, thunkAPI) => {
-    // const { data } = await axios.post(`http://3.39.231.71/api/user/signup`, payload);
      const { data } = await api.post("/api/user/signup", payload);
 
     // 회원가입 성공 시 alert & 상태 저장
@@ -16,7 +15,6 @@ export const __signup = createAsyncThunk(
     return thunkAPI.fulfillWithValue(data);
   }
 );
-
 
 // // slice
 const signupSlice = createSlice({
