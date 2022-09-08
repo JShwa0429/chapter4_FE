@@ -30,7 +30,7 @@ const EditButton = () => {
   const [addData, setAddData] = useState(data);
   const [findToken, setFindToken] = useState(null);
   const [, forReder] = useState();
-  const forReRender = useCallback(()=> forReder({}),[]);
+  const forReRender = useCallback(() => forReder({}), []);
   const inputRef = useRef(0);
 
   const getDatas = async () => {
@@ -38,13 +38,13 @@ const EditButton = () => {
       .get(`/api/movie/${movieid.id}`)
       .then((res) => setData(res.data.data.comments));
     await api
-          .get(`/api/movie/${movieid.id}`)
-          .then((res) => setComments(res.data.data));   
+      .get(`/api/movie/${movieid.id}`)
+      .then((res) => setComments(res.data.data));
   };
 
   useEffect(() => {
-  const authorization = localStorage.getItem("authorization")
-          setFindToken(authorization);
+    const authorization = localStorage.getItem("authorization");
+    setFindToken(authorization);
     getDatas();
   }, []);
 
@@ -76,6 +76,7 @@ const EditButton = () => {
             content: inputRef.current.value,
           })
         );
+        window.location.reload();
       }
     }
   };
