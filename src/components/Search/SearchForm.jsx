@@ -5,7 +5,11 @@ import { forwardRef } from "react";
 const SearchForm = ({ onClick }, ref) => {
   return (
     <Form>
-      <input type="text" ref={ref} placehodler="검색어를 입력해주세요" />
+      <input
+        type="text"
+        ref={ref}
+        placehodler="검색어를 입력해주세요(띄어쓰기를 지켜주세요)"
+      />
       <Button type="button" onClick={onClick}>
         검색
       </Button>

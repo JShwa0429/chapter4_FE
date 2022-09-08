@@ -1,10 +1,16 @@
 import { Header, Ranks, Tab, Dots, Search } from "../components";
 import styled from "styled-components";
 import { useRef, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { __getRankList } from "../redux/modules/rankSlice";
 
 const MainPage = () => {
   const outerRef = useRef();
   const [scrollIndex, setScrollIndex] = useState(1);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(__getRankList());
+  }, [dispatch]);
 
   useEffect(() => {
     const wheelHandler = (e) => {
@@ -16,7 +22,6 @@ const MainPage = () => {
       if (deltaY > 0) {
         if (scrollTop >= 0 && scrollTop < pageHeight) {
           //현재 1페이지
-          console.log("현재 1페이지, down");
           outerRef.current.scrollTo({
             top: pageHeight + DIVIDER_HEIGHT,
             left: 0,
@@ -25,7 +30,7 @@ const MainPage = () => {
           setScrollIndex(2);
         } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
           //현재 2페이지
-          console.log("현재 2페이지, down");
+
           outerRef.current.scrollTo({
             top: pageHeight * 2 + DIVIDER_HEIGHT * 2,
             left: 0,
@@ -34,7 +39,7 @@ const MainPage = () => {
           setScrollIndex(3);
         } else {
           // 현재 3페이지
-          console.log("현재 3페이지, down");
+
           outerRef.current.scrollTo({
             top: pageHeight * 2 + DIVIDER_HEIGHT * 2,
             left: 0,
@@ -45,7 +50,7 @@ const MainPage = () => {
       } else {
         if (scrollTop >= 0 && scrollTop < pageHeight) {
           //현재 1페이지
-          console.log("현재 1페이지, up");
+
           outerRef.current.scrollTo({
             top: 0,
             left: 0,
@@ -54,7 +59,6 @@ const MainPage = () => {
           setScrollIndex(1);
         } else if (scrollTop >= pageHeight && scrollTop < pageHeight * 2) {
           //현재 2페이지
-          console.log("현재 2페이지, up");
           outerRef.current.scrollTo({
             top: 0,
             left: 0,
@@ -63,7 +67,7 @@ const MainPage = () => {
           setScrollIndex(1);
         } else {
           // 현재 3페이지
-          console.log("현재 3페이지, up");
+
           outerRef.current.scrollTo({
             top: pageHeight + DIVIDER_HEIGHT,
             left: 0,

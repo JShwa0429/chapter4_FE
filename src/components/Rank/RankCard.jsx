@@ -5,9 +5,11 @@ const RankCard = ({ data, ott }) => {
   return (
     <CardDiv>
       <img alt={ott} src={`${process.env.PUBLIC_URL}/images/${ott}.png`} />
-      {data.map((v) => {
-        return <Rank key={v.title} {...v}></Rank>;
-      })}
+      {data
+        .filter((v) => v.platform === ott)
+        .map((v) => {
+          return <Rank key={v.title} {...v}></Rank>;
+        })}
     </CardDiv>
   );
 };

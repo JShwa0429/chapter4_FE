@@ -22,7 +22,7 @@ const DivHeader = styled.div`
   z-index: 99;
   max-width: 1200px;
   min-width: 800px;
-  background-color: white;
+  background-color: grey;
 `;
 
 const DivLink = styled.div`
@@ -38,6 +38,8 @@ const DivTitle = styled.div`
   width: 100%;
   height: 50px;
   text-align: center;
+  background-color: black;
+  color: red;
 
   h1 {
     font-size: 32px;
