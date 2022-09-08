@@ -20,7 +20,10 @@ export const api = axios.create({
 
 // 매 실행 시 토큰값 넣기, 없으면 null값이 들어간다
 api.interceptors.request.use(function (config) {
-  const accessToken = localStorage.getItem("refresh-token");
-  config.headers.common["Authorization"] = `Bearer ${accessToken}`;
+  const refreshToken = localStorage.getItem("refresh-token");
+  const accessToken = localStorage.getItem("authorization");
+  config.headers.common["authorization"] = `${accessToken}`;
+  config.headers.common['refresh-token'] = `${refreshToken}`;
   return config;
+ 
 });

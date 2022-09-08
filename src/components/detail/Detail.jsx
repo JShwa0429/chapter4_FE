@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { Navigate, useNavigate } from "react-router-dom";
+import {  useNavigate,useParams } from "react-router-dom";
 
 import { api } from "../../shared/api";
-import { useDispatch, useSelector } from "react-redux";
-import { PlusSquareOutlined } from "@ant-design/icons";
 
 import EditButton from "./EditButton";
 import { __getMoviesList } from "../../redux/modules/MovieSlice";
@@ -14,40 +12,21 @@ import {
 } from "../../redux/modules/CommentSlice";
 
 const Detail = () => {
+  const id = useParams();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const inputRef = useRef(0);
-  const [comments, setComments] = useState([]);
   const [findToken, setFindToken] = useState(null);
   const [movieData, setMovieData] = useState(null);
 
   useEffect(() => {
     const getDatas = async () => {
-      await api.get(`/api/movie/1`).then((res) => setMovieData(res.data.data));
+      await api.get(`/api/movie/${id.id}`).then((res) => setMovieData(res.data.data));
+      await api.get(`/api/movie/${id.id}`).then((res) => setFindToken(res));
     };
     getDatas();
   }, []);
 
-  const addButton = (inputRef) => {
-    if (comments.accessToken == 1) {
-      window.alert("로그인 후 이용해주세요");
-      navigate("/login");
-    } else {
-      if (inputRef.current.value == "") {
-        window.alert("댓글을 입력해주세요!");
-      } else {
-        dispatch(
-          __addComment({
-            ...comments,
-            id: movieData.id,
-            content: inputRef.current.value,
-          })
-        );
-      }
-    }
-  };
-  useEffect(() => {}, [addButton]);
 
+  console.log(findToken)
   return (
     <div>
       <OttHeader>
@@ -73,17 +52,6 @@ const Detail = () => {
             )}
           </div>
         </MoviePosterData>
-        <div style={{ flexDirection: "row" }}>
-          <AddCommentInput
-            ref={inputRef}
-            placeholder={"댓글을 추가해보세요!"}
-          />
-          <PlusSquareOutlined
-            onClick={() => addButton(inputRef)}
-            style={{ fontSize: "30px", float: "right", marginRight: "50px" }}
-          />
-        </div>
-
         <EditButton />
       </DetailLayout>
     </div>
@@ -174,15 +142,3 @@ const MovieContent = styled.p`
   text-overflow: ellipsis;
 `;
 
-const AddCommentInput = styled.input`
-  width: 500px;
-  height: 30px;
-  color: white;
-  font-weight: bold;
-  background-color: black;
-  border-radius: 6px;
-  border: 1px solid white;
-  margin-left: 50px;
-  margin-bottom: 10px;
-  text-align: center;
-`;

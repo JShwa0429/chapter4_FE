@@ -54,7 +54,6 @@ const Tab = () => {
             {v}
           </Button>
         ))}
-        <Link to="/detail">detail</Link>
       </ButtonDiv>
 
       {tabArray.map((tab, index) =>
