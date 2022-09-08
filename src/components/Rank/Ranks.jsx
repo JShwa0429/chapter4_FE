@@ -18,10 +18,12 @@ const Ranks = () => {
 
 const DivRanks = styled.div`
   width: 100%;
+  height: 100vh;
   display: grid;
   place-items: center;
-  grid-template-columns: repeat(2, 600px);
-  grid-template-rows: repeat(2, 400px);
+
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
 `;
 
 export default Ranks;

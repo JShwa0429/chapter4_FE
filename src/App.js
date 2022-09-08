@@ -3,8 +3,7 @@ import styled from "styled-components";
 import { MainPage } from "./pages";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
-import Detail from "./components/detail/Detail"
-
+import Detail from "./components/detail/Detail";
 
 function App() {
   return (
@@ -13,7 +12,8 @@ function App() {
         <Route path="/" element={<MainPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="signup" element={<SignUpPage />} />
-        <Route path="/detail" element={<Detail/>} />
+        <Route path="/detail" element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail />} />
       </Routes>
     </DivApp>
   );

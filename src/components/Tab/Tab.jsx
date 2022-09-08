@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Poster from "./Poster";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { EyeTwoTone } from "@ant-design/icons";
 
 const Tab = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -41,6 +42,12 @@ const Tab = () => {
 
   const navigate = useNavigate();
 
+  const handleMoveToDetail = (e) => {
+    e.preventDefault();
+    console.log(e.target);
+    navigate(`/detail/${e.target.id}`);
+  };
+
   return (
     <DivTab>
       <ButtonDiv>
@@ -66,7 +73,8 @@ const Tab = () => {
                   key={`${Poster}${idx}`}
                   rank={value.rank}
                   imgUrl={value.imgUrl}
-                  onClick={() => navigate(value.id)}
+                  id={value.id}
+                  onClick={handleMoveToDetail}
                 >
                   {value.title}
                 </Poster>
@@ -86,12 +94,12 @@ const DivTab = styled.div`
 
   .slick-prev:before {
     opacity: 1; // 기존에 숨어있던 화살표 버튼이 보이게
-    color: black; // 버튼 색은 검은색으로
+    color: white; // 버튼 색은 검은색으로
     left: 0;
   }
   .slick-next:before {
     opacity: 1;
-    color: black;
+    color: white;
   }
 `;
 
@@ -99,7 +107,7 @@ const ButtonDiv = styled.div`
   button {
     width: 150px;
     height: 30px;
-
+    border: 1px solid black;
     border-radius: 0;
   }
 

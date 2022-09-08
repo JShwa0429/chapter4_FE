@@ -13,8 +13,8 @@ const SearchResult = ({ data }) => {
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToShow: 4,
+    slidesToScroll: 4,
   };
   return (
     <DivResult>
@@ -29,7 +29,9 @@ const SearchResult = ({ data }) => {
                   <Logo>
                     <img
                       alt={provider}
-                      src={`${process.env.PUBLIC_URL}/images/${provider}.png`}
+                      src={`${
+                        process.env.PUBLIC_URL
+                      }/images/${provider.toUpperCase()}.png`}
                       key={`제공자${idx}`}
                     />
                   </Logo>
@@ -44,16 +46,16 @@ const SearchResult = ({ data }) => {
 };
 
 const DivResult = styled.div`
-  width: 900px;
+  width: 100vh;
 
   .slick-prev:before {
     opacity: 1; // 기존에 숨어있던 화살표 버튼이 보이게
-    color: black; // 버튼 색은 검은색으로
+    color: white; // 버튼 색은 검은색으로
     left: 0;
   }
   .slick-next:before {
     opacity: 1;
-    color: black;
+    color: white;
   }
 `;
 
@@ -64,6 +66,7 @@ const DivData = styled.div`
   object-fit: cover;
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   h3 {
     font-weight: bold;
@@ -71,7 +74,7 @@ const DivData = styled.div`
   }
 
   img {
-    width: 100%;
+    height: 40vh;
     object-fit: contain;
   }
 `;

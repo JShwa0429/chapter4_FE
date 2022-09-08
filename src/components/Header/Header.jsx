@@ -22,7 +22,7 @@ const DivHeader = styled.div`
   z-index: 99;
   max-width: 1200px;
   min-width: 800px;
-  background-color: grey;
+  background-color: black;
 `;
 
 const DivLink = styled.div`
@@ -31,6 +31,10 @@ const DivLink = styled.div`
   justify-content: space-between;
   width: 10em;
   margin-left: auto;
+  a {
+    text-decoration: none;
+    color: white;
+  }
 `;
 
 const DivTitle = styled.div`

@@ -87,10 +87,6 @@ const Search = () => {
       <SearchForm ref={searchRef} onClick={handleSearch} />
       {datas && (
         <DivFlex>
-          <h1>
-            {searchRef.current.value}...<small>검색결과</small>
-          </h1>
-
           <SearchResult data={datas.data} />
         </DivFlex>
       )}
@@ -119,7 +115,7 @@ const DivFlex = styled.div`
   display: flex;
   flex-direction: column;
   position: absolute;
-  top: 30%;
+  top: 35%;
   align-items: center;
 `;
 
