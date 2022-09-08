@@ -29,8 +29,6 @@ const EditButton = () => {
   const [data, setData] = useState([]);
   const [addData, setAddData] = useState(data);
   const [findToken, setFindToken] = useState(null);
-  const [, forReder] = useState();
-  const forReRender = useCallback(()=> forReder({}),[]);
   const inputRef = useRef(0);
 
   const getDatas = async () => {
@@ -76,6 +74,7 @@ const EditButton = () => {
             content: inputRef.current.value,
           })
         );
+      window.location.reload();
       }
     }
   };
