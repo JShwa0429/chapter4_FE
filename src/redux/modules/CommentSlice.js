@@ -48,9 +48,9 @@ export const __getCommentList = createAsyncThunk(
 );
 
 export const __addComment = createAsyncThunk("ADD_COMMENT", async (payload, thunkAPI) => {
-  console.log(payload)
+  console.log(payload.id)
    const sendContent ={content:payload.content};
-  const { data } = await api.post(`api/auth/comment?movieId=1`, sendContent);
+  const { data } = await api.post(`api/auth/comment?movieId=${payload.id}`, sendContent);
   return thunkAPI.fulfillWithValue(data);
 });
 

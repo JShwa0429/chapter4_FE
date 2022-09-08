@@ -25,8 +25,6 @@ const Detail = () => {
     getDatas();
   }, []);
 
-
-  console.log(findToken)
   return (
     <div>
       <OttHeader>

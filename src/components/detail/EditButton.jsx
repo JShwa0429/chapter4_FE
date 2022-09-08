@@ -36,16 +36,19 @@ const EditButton = () => {
       .get(`/api/movie/${movieid.id}`)
       .then((res) => setData(res.data.data.comments));
     await api
-      .get(`/api/movie/${movieid.id}`)
-      .then((res) => setFindToken(res.config.headers.authorization));
-      const authorization = localStorage.getItem("authorization");
-      setFindToken(authorization)
-    await api
-      .get(`/api/movie/${movieid.id}`)
-      .then((res) => setComments(res.data.data));
+          .get(`/api/movie/${movieid.id}`)
+          .then((res) => setComments(res.data.data));
+          
+          
+      
   };
 
+ 
+
   useEffect(() => {
+    
+  const authorization = localStorage.getItem("authorization")
+          setFindToken(authorization);
     getDatas();
   }, []);
 
@@ -61,10 +64,12 @@ const EditButton = () => {
       };
     });
     setAddData(editCheck);
-  }, [findToken]);
+  }, [data]);
 
+ console.log(addData)
+ console.log(findToken)
   const addButton = (inputRef) => {
-    if (findToken == "null") {
+    if (findToken == null) {
       window.alert("로그인 후 이용해주세요");
       navigate("/login");
     } else {
@@ -159,7 +164,6 @@ const EditButton = () => {
     }
   };
 
-  console.log(addData)
   return (
     <CommentsLayout>
       <div style={{ flexDirection: "row" }}>
@@ -177,7 +181,7 @@ const EditButton = () => {
             <div
               style={{ marginTop: "5px", fontSize: "15px", fontWeight: "bold" }}
             >
-              {list.accessToken != "null" ? (
+              {list.accessToken != null ? (
                 list.editCheck ? (
                   <ToggleInput ref={inputRef} />
                 ) : (
@@ -188,7 +192,7 @@ const EditButton = () => {
               )}
             </div>
           </CommentContent>
-          {list.accessToken != "null" ? (
+          {list.accessToken != null ? (
             <div>
               <Button onClick={() => toggleDone(list)}>
                 {list.editCheck ? "취소" : "수정"}
