@@ -17,6 +17,7 @@ const DivPoster = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  border: 1px solid white;
 
   img {
     object-fit: contain;
