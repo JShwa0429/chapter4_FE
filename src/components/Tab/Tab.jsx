@@ -36,7 +36,6 @@ const Tab = () => {
   }, []);
 
   useEffect(() => {
-    console.log("데이터", datas);
   }, [datas]);
 
   return (

@@ -29,7 +29,7 @@ const SignIn = () => {
       alert("아이디 혹은 비밀번호가 틀렸습니다.");
     }
     // 로그인시 환영 인사 후 페이지 이동
-    if (loginState.payload.result) {
+    if (loginState.payload) {
       alert(`${loginState.payload.nickName} 님 환영합니다 :) `);
       navigate("/");
     }

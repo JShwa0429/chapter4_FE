@@ -10,6 +10,7 @@ const middlewares = [thunk];
 const rootReducer = combineReducers({
   login: loginReducer,
   signup: signupReducer,
+  comment,movie
 });
 // 스토어 연결
 const store = configureStore({

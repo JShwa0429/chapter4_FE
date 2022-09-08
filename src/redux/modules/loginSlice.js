@@ -9,13 +9,18 @@ import { api } from "../../shared/api";
 export const __login = createAsyncThunk(
   "log/LOGIN_LOG",
   async (payload, thunkAPI) => {
-    const response = await api.post("/user/login", payload);
+    const response = await api.post("api/user/login", payload);
+    console.log(response)
+    const reToken = "eyJhbGciOiJIUzI1NiJ9";
     // 토큰 localstorge 저장하기
-    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("token",response.headers.authorization);
+    localStorage.setItem("refreshtoken",response.headers['refresh-token']);
     // 로그인 상태 값 {true / false}
+    console.log(localStorage.refreshtoken,typeof(localStorage.refreshtoken))
     return response.data;
   }
 );
+
 // 재 접속시 토큰 유효기간 확인
 export const __checkToken = createAsyncThunk(
   "__checkToken/CHECK_LOG",
