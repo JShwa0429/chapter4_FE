@@ -8,8 +8,7 @@ import { __login } from "../../redux/modules/loginSlice";
 const SignIn = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  // 버튼 잠금 state
-  const [formstate, setFromState] = useState(false);
+
   // data 입력 state
   const [loginData, setloginData] = useState({ email: "", password: "" });
 
@@ -23,26 +22,15 @@ const SignIn = () => {
   const submitLogin = async (e) => {
     // 새로고침 막기
     e.preventDefault();
-    // 상태 받아오기 (에러로 받아져서 .....)
+    // 가입되지 않은 유저 확인
     const loginState = await dispatch(__login(loginData));
     if (loginState.type === "log/LOGIN_LOG/rejected") {
       alert("아이디 혹은 비밀번호가 틀렸습니다.");
     }
-    // 로그인시 환영 인사 후 페이지 이동
-    if (loginState.payload.result) {
-      alert(`${loginState.payload.nickName} 님 환영합니다 :) `);
+    if (loginState.payload) {
       navigate("/");
     }
   };
-
-  React.useEffect(() => {
-    // 로그인 버튼 잠금
-    if (loginData.email !== "" && loginData.password !== "") {
-      setFromState(true);
-    } else {
-      setFromState(false);
-    }
-  }, [loginData]);
 
   return (
     <LoginLayoutBox>
@@ -66,24 +54,17 @@ const SignIn = () => {
             required
           ></LoginPwinput>
         </LoginPwBox>
-        <LoginButton
-          type="submit"
-          size="size1"
-          bgcolor={formstate ? "blue" : "grey"}
-          color={formstate ? "white" : "black"}
-          disabled={!formstate}
-        >
-          로그인
-        </LoginButton>
-        <SocialLoginButton
+        <LoginButton type="submit">로그인</LoginButton>
+        {/* <SocialLoginButton
           onClick={() => {
             navigate("/");
           }}
         >
           카카오로그인
-        </SocialLoginButton>
+        </SocialLoginButton> */}
         <Loginhr />
         <LoginSignUpButton
+          type="button"
           onClick={() => {
             navigate("/signup");
           }}
@@ -101,9 +82,9 @@ const LoginLayoutBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #f5f5f5;
 `;
 const LoginBox = styled.form`
-  background-color: #fff;
   width: 400px;
   height: 500px;
   display: flex;
@@ -115,6 +96,7 @@ const LoginTitle = styled.div`
   font-size: 30px;
   font-weight: bold;
   margin-bottom: 30px;
+  color: #141414;
 `;
 const LoginIdBox = styled.div``;
 
@@ -139,12 +121,18 @@ const LoginButton = styled.button`
   height: 50px;
   margin-bottom: 5px;
   cursor: pointer;
+  &:hover {
+    background: #141414;
+    border: 1px solid #f5f5f5;
+    color: #f5f5f5;
+    font-weight: bold;
+  }
 `;
-const SocialLoginButton = styled.button`
-  width: 300px;
-  height: 50px;
-  cursor: pointer;
-`;
+// const SocialLoginButton = styled.button`
+//   width: 300px;
+//   height: 50px;
+//   cursor: pointer;
+// `;
 const Loginhr = styled.div`
   width: 100%;
   margin: 50px 0 30px 0;
@@ -153,10 +141,16 @@ const Loginhr = styled.div`
 
 const LoginSignUpButton = styled.button`
   border: none;
-  background-color: #fff;
   width: 300px;
-  height: 40px;
+  height: 50px;
+  background: none;
   cursor: pointer;
+  &:hover {
+    background: #141414;
+    border: 1px solid #f5f5f5;
+    color: #f5f5f5;
+    font-weight: bold;
+  }
 `;
 
 export default SignIn;
