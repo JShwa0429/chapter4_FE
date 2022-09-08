@@ -6,7 +6,7 @@
 
 ## 프로젝트 주소
 * SA : https://www.notion.so/SA-4-dca5c49e6d5444df904da9f421df8224
-* 시연 영상 : 
+* 시연 영상 : https://www.youtube.com/watch?v=cmdomPOBetA
 
 
 ## 프로젝트 기간
