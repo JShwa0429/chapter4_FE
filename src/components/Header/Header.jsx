@@ -4,6 +4,7 @@ import styled from "styled-components";
 const Header = () => {
   const logout = () => {
     window.localStorage.removeItem("refresh-token");
+    window.localStorage.removeItem("authorization");
     navigator("/");
   };
 

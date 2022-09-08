@@ -52,6 +52,7 @@ const SignIn = () => {
             onChange={changeInput}
             placeholder="비밀번호"
             required
+            minLength={4}
           ></LoginPwinput>
         </LoginPwBox>
         <LoginButton type="submit">로그인</LoginButton>

@@ -50,6 +50,7 @@ export default function SignUpForm() {
           id="email"
           onChange={changeInput}
           required
+          placeholder={"이메일 형식에 맞게 입력해주세요."}
         ></SignUpInput>
 
         <SignUpSubTitle>닉네임</SignUpSubTitle>
@@ -58,6 +59,8 @@ export default function SignUpForm() {
           id="nickName"
           onChange={changeInput}
           required
+          maxLength={6}
+          placeholder={"최대 6자리까지 입력해주세요"}
         ></SignUpInput>
 
         <SignUpSubTitle>비밀번호</SignUpSubTitle>
@@ -66,6 +69,8 @@ export default function SignUpForm() {
           id="password"
           onChange={changeInput}
           required
+          minLength={4}
+          placeholder={"4자리 이상 입력해주세요"}
         ></SignUpInput>
 
         <SignUpSubTitle>비밀번호 확인</SignUpSubTitle>
@@ -74,6 +79,8 @@ export default function SignUpForm() {
           type="password"
           onChange={changeInput}
           required
+          minLength={4}
+          placeholder={"비밀번호를 다시 입력해주세요"}
         ></SignUpInput>
 
         <SignUpButton>가입하기</SignUpButton>
@@ -123,7 +130,12 @@ const SignUpInput = styled.input`
   margin: 10px auto;
   padding: 0 10px;
   font-size: 15px;
+  ::placeholder {
+    font-size: 12px;
+    color: #a5a5a5;
+  }
 `;
+
 const SignUpButton = styled.button`
   width: 300px;
   height: 50px;
