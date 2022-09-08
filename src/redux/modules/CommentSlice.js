@@ -1,65 +1,81 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import {api} from "../../shared/api"
 
 const initialState = {
   comment: [
-    {
-      id: 0,
-      accessToken: true,
-      nickName: "길동이",
-      content: "저는 어디에도 있고 어디에도 없습니다.",
-      editCheck: false,
-      dislikeCheck: false,
-      likes: 0,
-      dislike: 0,
-    },
-    {
-      id: 1,
-      accessToken: false,
-      nickName: "발락",
-      content: "여기가 차붐의 나라입니까..?",
-      editCheck: false,
-      dislikeCheck: false,
-      likes: 0,
-      dislikes: 0,
-    },
-    {
-      id: 2,
-      accessToken: false,
-      nickName: "예수그리스도",
-      content: '"AMEN"',
-      editCheck: false,
-      dislikeCheck: false,
-      likes: 0,
-      dislikes: 0,
-    },
+    // {
+    //   id: 0,
+    //   accessToken: true,
+    //   nickName: "길동이",
+    //   content: "저는 어디에도 있고 어디에도 없습니다.",
+    //   editCheck: false,
+    //   dislikeCheck: false,
+    //   likes: 0,
+    //   dislike: 0,
+    // },
+    // {
+    //   id: 1,
+    //   accessToken: false,
+    //   nickName: "발락",
+    //   content: "여기가 차붐의 나라입니까..?",
+    //   editCheck: false,
+    //   dislikeCheck: false,
+    //   likes: 0,
+    //   dislikes: 0,
+    // },
+    // {
+    //   id: 2,
+    //   accessToken: false,
+    //   nickName: "예수그리스도",
+    //   content: '"AMEN"',
+    //   editCheck: false,
+    //   dislikeCheck: false,
+    //   likes: 0,
+    //   dislikes: 0,
+    // },
   ],
 };
 
 export const __getCommentList = createAsyncThunk(
   "GET_COMMENT_LIST",
   async (payload, thunkAPI) => {
-    const { data } = await axios.get(
-      `http://3.39.231.71/api/movie/1`
+    const { data } = await api.get(
+      `api/movie/1`
     );
     return thunkAPI.fulfillWithValue(data);
   }
 );
 
-export const addComment = createAsyncThunk("ADD_COMMENT", async (payload, thunkAPI) => {
-  const { data } = await axios.post("http://localhost:3001/success/data/comments", payload);
+export const __addComment = createAsyncThunk("ADD_COMMENT", async (payload, thunkAPI) => {
+  console.log(payload)
+   const sendContent ={content:payload.content};
+  const { data } = await api.post(`api/auth/comment?movieId=1`, sendContent);
   return thunkAPI.fulfillWithValue(data);
 });
 
+//${payload.id} {content:payload.content}
 export const __removeComment = createAsyncThunk(
   "REMOVE_COMMENT",
   async (payload, thunkAPI) => {
-    const res = await axios.delete(
-      `http://localhost:3001/comment/${payload.id}?todoId=${payload.todoId}`
+    const res = await api.delete(
+      `/api/auth/comment/${payload.id}`
     );
     return thunkAPI.fulfillWithValue(res);
   }
 );
+
+export const __saveComment = createAsyncThunk(
+  "SAVE_COMMENT",
+  async (payload, thunkAPI) => {
+    const sendContent ={content:payload.content};
+    const res = await api.put(
+      `/api/auth/comment/${payload.id}`,sendContent
+    );
+    return thunkAPI.fulfillWithValue(res);
+  }
+);
+
 
 export const CommentSlice = createSlice({
   name: "comment",
@@ -123,16 +139,25 @@ export const CommentSlice = createSlice({
 
   extraReducers: {
     [__getCommentList.fulfilled]: (state, action) => {
-      console.log(action.payload)
       state.comment = [action.payload.data.comments[0]];
     },
 
-    [addComment.fulfilled]: (state, action) => {
+    [__addComment.fulfilled]: (state, action) => {
       console.log(action.payload)
       state.comment.push(action.payload);
     },
+    [__removeComment.fulfilled]: (state, action) => {
+      console.log(action.payload)
+      state.comment = state.comment.filter((list)=> list.id !== action.payload.id);
+    },
+    [__saveComment.fulfilled]: (state, action) => {
+      console.log(action.payload)
+      state.comment = state.comment.map((list)=> list.id === action.payload.id ? {...list,comment:action.payload.comment, editCheck:false } :list);
+    },
+    [__saveComment.rejected]: (state, action) => {
+      console.log(action.payload)
+    },
   },
 });
-
-export const { toggleEditCheck, toggleLikeData,toggleDistLikeData,removeComment,saveComment } = CommentSlice.actions;
+export const { toggleEditCheck, toggleLikeData,toggleDistLikeData,removeComment,saveComment, } = CommentSlice.actions;
 export default CommentSlice.reducer;

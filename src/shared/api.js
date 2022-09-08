@@ -9,6 +9,15 @@ export const api = axios.create({
   },
 });
 
+// api.interceptors.request.use(function (config) {
+// 	const accessToken = localStorage.token;
+// 	const refrechToken = localStorage.refreshtoken
+// 	config.headers.common['authorization'] = `${accessToken}`;
+// 	config.headers.common['refresh-token'] = `${refrechToken}`;
+// 	return config;
+// });
+
+
 // 매 실행 시 토큰값 넣기, 없으면 null값이 들어간다
 api.interceptors.request.use(function (config) {
   const accessToken = localStorage.getItem("refresh-token");
