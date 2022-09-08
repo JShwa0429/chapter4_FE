@@ -122,6 +122,7 @@ const DivMainPage = styled.div`
 const DivOuter = styled.div`
   width: 100vw;
   overflow-y: auto;
+  background-color: black;
 `;
 
 const DivInner = styled.div`
@@ -132,12 +133,13 @@ const DivInner = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+  background-color: black;
 `;
 
 const Divider = styled.div`
   width: 100%;
-  height: 5px;
-  background-color: gray;
+  max-height: 5px;
+  background-color: black;
 `;
 
 export default MainPage;

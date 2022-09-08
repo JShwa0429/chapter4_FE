@@ -1,18 +1,21 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { api } from "../../shared/api";
 
 const initialState = {
-    movie: [],
+  movie: [],
 };
 
-export const __getMoviesList = createAsyncThunk("movies/GET_MOVIE_LIST", async (payload, thunkAPI) => {
-  try{
-  const { data } = await axios.get(`http://3.39.231.71/`);
-  return thunkAPI.fulfillWithValue(data);}
-  catch (error) {
-    return thunkAPI.rejectWithValue(error.code);
+export const __getMoviesList = createAsyncThunk(
+  "movies/GET_MOVIE_LIST",
+  async (payload, thunkAPI) => {
+    try {
+      const { data } = await api.get(`http://3.39.231.71/`);
+      return thunkAPI.fulfillWithValue(data);
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.code);
+    }
   }
-});
+);
 
 //const { data } = await axios.get(`http://spartacodingclub.shop/web/api/movie`);
 
@@ -29,6 +32,5 @@ export const MovieSlice = createSlice({
     },
   },
 });
- 
-export default MovieSlice.reducer;
 
+export default MovieSlice.reducer;

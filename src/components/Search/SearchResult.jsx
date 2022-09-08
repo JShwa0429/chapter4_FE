@@ -13,23 +13,50 @@ const SearchResult = ({ data }) => {
   const settings = {
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToShow: 4,
+    slidesToScroll: 4,
   };
   return (
     <DivResult>
-      <Slider {...settings}>
-        {data.map((v, idx) => {
+      {data.length > 1 && (
+        <Slider {...settings}>
+          {data.map((v, idx) => {
+            return (
+              <DivData key={`${idx}번째 영화`}>
+                <DivTitle>{v.title}</DivTitle>
+                <img src={v.imgUrl} alt="포스터" />
+                <div>
+                  {v.providers.map((provider, idx) => (
+                    <Logo>
+                      <img
+                        alt={provider}
+                        src={`${
+                          process.env.PUBLIC_URL
+                        }/images/${provider.toUpperCase()}.png`}
+                        key={`제공자${idx}`}
+                      />
+                    </Logo>
+                  ))}
+                </div>
+              </DivData>
+            );
+          })}
+        </Slider>
+      )}
+      {data.length === 1 &&
+        data.map((v, idx) => {
           return (
             <DivData key={`${idx}번째 영화`}>
               <DivTitle>{v.title}</DivTitle>
               <img src={v.imgUrl} alt="포스터" />
-              <div>
+              <div style={{ margin: "0 auto" }}>
                 {v.providers.map((provider, idx) => (
                   <Logo>
                     <img
                       alt={provider}
-                      src={`${process.env.PUBLIC_URL}/images/${provider}.png`}
+                      src={`${
+                        process.env.PUBLIC_URL
+                      }/images/${provider.toUpperCase()}.png`}
                       key={`제공자${idx}`}
                     />
                   </Logo>
@@ -38,22 +65,28 @@ const SearchResult = ({ data }) => {
             </DivData>
           );
         })}
-      </Slider>
+      {data.length < 1 && <h1>검색 결과가 없습니다.</h1>}
     </DivResult>
   );
 };
 
 const DivResult = styled.div`
-  width: 900px;
+  width: 90vw;
 
   .slick-prev:before {
     opacity: 1; // 기존에 숨어있던 화살표 버튼이 보이게
-    color: black; // 버튼 색은 검은색으로
+    color: white; // 버튼 색은 검은색으로
     left: 0;
   }
   .slick-next:before {
     opacity: 1;
-    color: black;
+    color: white;
+  }
+
+  h1 {
+    color: white;
+    text-align: center;
+    margin-top: 15vh;
   }
 `;
 
@@ -64,26 +97,34 @@ const DivData = styled.div`
   object-fit: cover;
   display: flex;
   flex-direction: column;
-
+  align-items: center;
+  justify-content: center;
   h3 {
     font-weight: bold;
     text-align: center;
   }
 
   img {
-    width: 100%;
+    height: 45vh;
     object-fit: contain;
+    margin: 0 auto;
+  }
+
+  div {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
   }
 `;
 
 const DivTitle = styled.div`
   width: 100%;
-  height: 50px;
-  font-size: 1.5em;
+  height: 3em;
+  font-size: 14px;
   text-align: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  color: white;
 `;
 
 const Logo = styled.div`
@@ -93,8 +134,8 @@ const Logo = styled.div`
   float: left;
 
   img {
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     object-fit: contain;
   }
 `;

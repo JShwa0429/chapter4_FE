@@ -11,7 +11,7 @@ const Rank = ({ rank, title }) => {
 
 const DivRank = styled.div`
   border: 1px solid black;
-  height: 2em;
+  height: 5vh;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -21,6 +21,9 @@ const DivRank = styled.div`
     text-align: center;
   }
 
+  p {
+    color: white;
+  }
   .title {
     width: 70%;
     font-weight: bold;
