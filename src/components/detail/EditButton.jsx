@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import styled from "styled-components";
 import { api } from "../../shared/api";
 import { useDispatch } from "react-redux";
@@ -29,6 +29,8 @@ const EditButton = () => {
   const [data, setData] = useState([]);
   const [addData, setAddData] = useState(data);
   const [findToken, setFindToken] = useState(null);
+  const [, forReder] = useState();
+  const forReRender = useCallback(()=> forReder({}),[]);
   const inputRef = useRef(0);
 
   const getDatas = async () => {
@@ -37,16 +39,10 @@ const EditButton = () => {
       .then((res) => setData(res.data.data.comments));
     await api
           .get(`/api/movie/${movieid.id}`)
-          .then((res) => setComments(res.data.data));
-          
-          
-      
+          .then((res) => setComments(res.data.data));   
   };
 
- 
-
   useEffect(() => {
-    
   const authorization = localStorage.getItem("authorization")
           setFindToken(authorization);
     getDatas();
@@ -66,8 +62,6 @@ const EditButton = () => {
     setAddData(editCheck);
   }, [data]);
 
- console.log(addData)
- console.log(findToken)
   const addButton = (inputRef) => {
     if (findToken == null) {
       window.alert("로그인 후 이용해주세요");
